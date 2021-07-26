@@ -2,6 +2,8 @@
 
 The tower's oscillation is modeled as a discrete system with three degrees of freedom.
 
+The equations of motions are written [here](../blob/main/src/3dof-model/2021-07-25_EquationsOfMotion.pdf). 
+
 To simulate the dynamics, run the file simulate_3dof.m with Matlab.
 
 
