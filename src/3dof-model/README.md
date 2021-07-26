@@ -13,6 +13,8 @@ To simulate the dynamics, run the file [simulate_3dof.m](simulate_3dof.m) with M
 ![3DOF trajectory, stiff torsion](trajectory.gif)
 ![3DOF trajectory, soft torsion](trajectory_soft_torsion.gif)
 
+If the center of mass is exactly at point A, no orbits occur, see [here](trajectory_d_zero.gif).
+
 ## Sketch of the model
 
 ![Vibration model](vibration_model.jpg)
