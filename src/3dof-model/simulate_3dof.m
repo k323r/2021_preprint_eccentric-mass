@@ -1,16 +1,39 @@
 MAX_TIME = 30;
 DO_ANIMATE = 1;
+DO_USE_OFFSHORE = 1;
 
 DO_WRITE_GIF = 0;
 filename = 'trajectory.gif';
 
-m1 = 0.05;
-m2 = 0.1;
-d = 0.05;
-k1 = 25;
-k2 = 1; % GIFS were create dwith k2 = 1 and k2 = 0.1
-I = 0.002;
+% System A, the table top experiment.
+A.m1 = 0.05;
+A.m2 = 0.1;
+A.k1 = 25;
+A.k2 = 1; % GIFS were create dwith k2 = 1 and k2 = 0.1
+A.d = 0.05;
+A.I = 0.002;
+
+% System B, the offshore wind turbine.
+B.m1 = 320 * 10^3;
+B.m2 = 450 * 10^3;
+B.k1 = 3.4 * 10^6;
+B.k2 = 3.6 * 10^9;
+B.d = 0.28;
+B.I = 3.6 * 10^7;
+
 damp_theta = 0;
+
+if DO_USE_OFFSHORE
+    S = B;
+else
+    S = A;
+end
+m1 = S.m1;
+m2 = S.m2;
+k1 = S.k1;
+k2 = S.k2;
+d = S.d;
+I = S.I;
 
 
 % Initial conditions.
