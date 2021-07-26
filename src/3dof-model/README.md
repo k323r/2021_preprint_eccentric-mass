@@ -2,7 +2,7 @@
 
 The tower's vibration is modeled as a discrete system with three degrees of freedom.
 
-The equations of motions are written [here](2021-07-25_EquationsOfMotion.pdf). 
+The equations of motions are written [here](2021-07-25_EquationsOfMotion.pdf), its derivation (with a slightly different configuration for the rotationg body) [here](2021-07-24_EquationsOfMotion_Derivation.pdf). 
 
 To simulate the dynamics, run the file [simulate_3dof.m](simulate_3dof.m) with Matlab.
 
