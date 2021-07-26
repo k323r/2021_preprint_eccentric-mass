@@ -101,6 +101,7 @@ axis equal
 
 if DO_ANIMATE
     fig3 = figure();
+    hold on
     set(gcf,'color','w');
     xlabel('x (m)');
     ylabel('y (m)');
@@ -127,9 +128,15 @@ if DO_ANIMATE
     axis([-lim_val, lim_val, -lim_val, lim_val] * factor)
     step_size = 50;
     gif_step_size = 1000;
-    h_line = animatedline;
+    %h_line = animatedline;
+    h_point = plot(x(i), y(i), 'ok', 'markerfacecolor', 'k');
+    h_line = plot(x(i), y(i), '-k');
     for i = 1 : step_size : length(t)
-        addpoints(h_line, x(i), y(i));
+        %addpoints(h_line, x(i), y(i));
+        h_point.XData = x(i); %change x coordinate of the point
+        h_point.YData = y(i); %change y coordinate of the point
+        h_line.XData = [h_line.XData x(i)]; %add to line
+        h_line.YData = [h_line.YData y(i)]; %add to line
         title([num2str(t(i)) ' s']);
         drawnow
         
