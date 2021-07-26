@@ -1,6 +1,8 @@
 MAX_TIME = 30;
 DO_ANIMATE = 1;
+
 DO_WRITE_GIF = 0;
+filename = 'trajectory.gif';
 
 m1 = 0.05;
 m2 = 0.1;
@@ -101,12 +103,12 @@ if DO_ANIMATE
     fig3 = figure();
     %set(gca, 'visible', 'off');
     set(gcf,'color','w');
-    filename = 'trajectory.gif';
+    
     xlabel('x (m)');
     ylabel('y (m)');
     axis equal
-    factor = 1.1;
-    axis([-start_x, start_x, -start_x, start_x] * factor)
+    lim_val = sqrt(start_x^2 + start_y^2);
+    axis([-lim_val, lim_val, -lim_val, lim_val] * factor)
     step_size = 50;
     gif_step_size = 1000;
     h_line = animatedline;
