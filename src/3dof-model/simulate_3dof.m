@@ -1,5 +1,5 @@
 MAX_TIME = 30;
-DO_ANIMATE = 1;
+DO_ANIMATE = 0;
 
 DO_WRITE_GIF = 0;
 filename = 'trajectory.gif';
@@ -8,7 +8,7 @@ m1 = 0.05;
 m2 = 0.1;
 d = 0.05;
 k1 = 25;
-k2 = 1;
+k2 = 1; % GIFS were create dwith k2 = 1 and k2 = 0.1
 I = 0.002;
 damp_theta = 0;
 
