@@ -1,5 +1,5 @@
 MAX_TIME = 30;
-DO_ANIMATE = 0;
+DO_ANIMATE = 1;
 
 DO_WRITE_GIF = 0;
 filename = 'trajectory.gif';
@@ -101,12 +101,28 @@ axis equal
 
 if DO_ANIMATE
     fig3 = figure();
-    %set(gca, 'visible', 'off');
     set(gcf,'color','w');
-    
     xlabel('x (m)');
     ylabel('y (m)');
     axis equal
+    
+    % Thanks to: https://de.mathworks.com/matlabcentral/answers/385245-how-can-i-create-a-text-box-alongside-my-plot
+    % set the width of the axis (the third value in Position) 
+    % to be 60% of the Figure's width
+    a = gca;
+    a.Position(3) = 0.6;
+    % put the textbox at 75% of the width and 
+    % 10% of the height of the figure
+    s = {['m_1 = ' num2str(m1)], ...
+        ['m_2 = ' num2str(m2)]...
+        ['k_1 = ' num2str(k1)]...
+        ['k_2 = ' num2str(k2)]...
+        ['d = ' num2str(d)]...
+        ['I_{zz} ' num2str(I)]...
+        };
+    annotation('textbox', [0.75, 0.5, 0.1, 0.1], 'String', s)
+
+    
     lim_val = sqrt(start_x^2 + start_y^2);
     axis([-lim_val, lim_val, -lim_val, lim_val] * factor)
     step_size = 50;
