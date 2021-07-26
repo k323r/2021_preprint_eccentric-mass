@@ -1,6 +1,9 @@
 # Modeling the tower's vibration as a 3 DOF system
 
-Run the file simulate_3dof.m with Matlab.
+The tower's oscillation is modeled as a discrete system with three degrees of freedom.
+
+To simulate the dynamics, run the file simulate_3dof.m with Matlab.
+
 
 ## Dynamics for the point A
 
