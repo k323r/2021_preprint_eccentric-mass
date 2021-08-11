@@ -1,17 +1,17 @@
 MAX_TIME = 30;
-DO_ANIMATE = 1;
-DO_USE_OFFSHORE = 1;
+DO_ANIMATE = 0;
+DO_USE_OFFSHORE = 0;
 
 DO_WRITE_GIF = 0;
-filename = 'trajectory.gif';
+filename = 'trajectory_tabletop.gif';
 
 % System A, the table top experiment.
-A.m1 = 0.05;
-A.m2 = 0.1;
-A.k1 = 25;
-A.k2 = 1; % GIFS were create dwith k2 = 1 and k2 = 0.1
-A.d = 0.05;
-A.I = 0.002;
+A.m1 = 0.0093; % in kg
+A.m2 = 0.044; % in kg
+A.k1 = 4.5; % in N/m
+A.k2 = 0.001 * 180 / pi; % in Nm/rad
+A.d = 0.038; % in m
+A.I = 0.00005; % in kg m^2 
 
 % System B, the offshore wind turbine.
 B.m1 = 320 * 10^3;
@@ -21,7 +21,7 @@ B.k2 = 3.6 * 10^9;
 B.d = 0.28;
 B.I = 3.6 * 10^7;
 
-damp_theta = 0;
+damp_theta = 0.0001;
 
 if DO_USE_OFFSHORE
     S = B;
@@ -37,8 +37,8 @@ I = S.I;
 
 
 % Initial conditions.
-start_x = 0.2;
-start_y = 0.2;
+start_x = 0.1;
+start_y = 0.1;
 
 f0_bending = 1 / (2 * pi) * sqrt(k1 / (m1 + m2))
 f0_torsion = 1 / (2 * pi) * sqrt(k2 / (I + m2 * d^2))
@@ -137,17 +137,18 @@ if DO_ANIMATE
     a.Position(3) = 0.6;
     % put the textbox at 75% of the width and 
     % 10% of the height of the figure
-    s = {['m_1 = ' num2str(m1)], ...
-        ['m_2 = ' num2str(m2)]...
-        ['k_1 = ' num2str(k1)]...
-        ['k_2 = ' num2str(k2)]...
-        ['d = ' num2str(d)]...
-        ['I_{zz} ' num2str(I)]...
+    s = {['m_1 = ' num2str(m1) ' kg'], ...
+        ['m_2 = ' num2str(m2) ' kg']...
+        ['k_1 = ' num2str(k1) ' N/m']...
+        ['k_2 = ' num2str(k2) ' Nm/rad']...
+        ['d = ' num2str(d) ' m']...
+        ['I_{zz} ' num2str(I) ' kg m^2']...
         };
     annotation('textbox', [0.75, 0.5, 0.1, 0.1], 'String', s)
 
     
     lim_val = sqrt(start_x^2 + start_y^2);
+    factor = 1.1;
     axis([-lim_val, lim_val, -lim_val, lim_val] * factor)
     step_size = 50;
     gif_step_size = 1000;
