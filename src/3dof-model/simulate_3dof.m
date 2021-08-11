@@ -1,17 +1,17 @@
 MAX_TIME = 30;
-DO_ANIMATE = 1;
+DO_ANIMATE = 0;
 DO_USE_OFFSHORE = 0;
 
 DO_WRITE_GIF = 0;
 filename = 'trajectory_tabletop.gif';
 
 % System A, the table top experiment.
-A.m1 = 0.05; % in kg
-A.m2 = 0.1; % in kg
+A.m1 = 0.0093; % in kg
+A.m2 = 0.044; % in kg
 A.k1 = 4.5; % in N/m
 A.k2 = 0.001 * 180 / pi; % in Nm/rad
-A.d = 0.05; % in m
-A.I = 0.00005; % in kg m^2
+A.d = 0.038; % in m
+A.I = 0.00005; % in kg m^2 
 
 % System B, the offshore wind turbine.
 B.m1 = 320 * 10^3;
@@ -37,8 +37,8 @@ I = S.I;
 
 
 % Initial conditions.
-start_x = 0.125;
-start_y = 0.05;
+start_x = 0.1;
+start_y = 0.1;
 
 f0_bending = 1 / (2 * pi) * sqrt(k1 / (m1 + m2))
 f0_torsion = 1 / (2 * pi) * sqrt(k2 / (I + m2 * d^2))
