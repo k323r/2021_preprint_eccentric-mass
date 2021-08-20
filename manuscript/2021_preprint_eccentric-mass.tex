@@ -121,9 +121,9 @@ The paper is subdivided into four sections: first, a table-top experiment (\auto
 \section{Cantilever experiment}
 \label{sec:experiment}
 
-As a first proof of concept, we built a table-top experiment that allows us to demonstrate the effect of an eccentric mass on the vibrations of a cantilevered beam. As a beam, we chose a wooden rod (massive beech, 0.006 m diameter) with a free length of 0.7 m. At the free end of the rod, we placed a 3D-printed lever that allowed us to add M8 bolts (0.028 m length, 0.0129 kg) to control eccentric mass. Lever length was 0.082 m weighing a total of XX kg. A second rod made of fibre glass (diameter 0.008 m) was placed next to the cantilevered beam. \autoref{fig:setup} shows the experimental setup. The second rod was used to displace the cantilevered beam from its resting position  by pulling the cantilevered beam towards the second rod using a thin thread. Initial displacement at the top of the rod was 0.135 m and three different masses (no bolts, two bolts, four bolts) were tested in the experiment. To release the cantilevered beam from it displaced position, the thread was burned using a lighter. While this release mechanism seems somewhat archaic, it ensures that no external torque is added to the system upon release. For each mass, the experiment was repeated three times. A MEMS-based inertial measurement (MPU 9255, InvenSense TDK, Tokyo, Japan) unit placed on top of the cantilevered beam measured linear acceleration and angular velocity with a sampling rate of 100 Hz. Measurements were recorded using a Raspberry Pi 400 and a custom written python script. All raw data is available at zenodo. 
+\subsection{Experimental Setup}
 
-Results were post-processed using a Jupyter Notebook and Python3. The Jupyter Notebook is available here. 
+As a first proof of concept, we built a table-top experiment that allows us to demonstrate the effect of an eccentric mass on the vibrations of a cantilevered beam. As a beam, we chose a wooden rod (massive beech, 0.006 m diameter) with a free length of 0.7 m. At the free end of the rod, we placed a 3D-printed lever that allowed us to add M8 bolts (0.028 m length, 0.0129 kg) to control eccentric mass. Lever length was 0.082 m weighing a total of XX kg. A second rod made of fibre glass (diameter 0.008 m) was placed next to the cantilevered beam. \autoref{fig:setup} shows the experimental setup. The second rod was used to displace the cantilevered beam from its resting position  by pulling the cantilevered beam towards the second rod using a thin thread. Initial displacement at the top of the rod was 0.135 m and three different masses (no bolts, two bolts, four bolts) were tested in the experiment. To release the cantilevered beam from it displaced position, the thread was burned using a lighter. While this release mechanism seems somewhat archaic, it ensures that no external torque is added to the system upon release. For each mass, the experiment was repeated three times. A MEMS-based inertial measurement (MPU 9255, InvenSense TDK, Tokyo, Japan) unit placed on top of the cantilevered beam measured linear acceleration and angular velocity with a sampling rate of 100 Hz. Measurements were recorded using a Raspberry Pi 400 and a custom written python script. All raw data is available at zenodo. 
 
 \begin{figure}[ht!]
     \centering
@@ -132,38 +132,111 @@ Results were post-processed using a Jupyter Notebook and Python3. The Jupyter No
     \label{fig:setup}
 \end{figure}
 
-\clearpage
+Results are post-processed using a Jupyter Notebook and Python3. The Jupyter Notebook is available here. 
+
+First, obtained accelerations in fore-aft and side-side direction are resampled to 50 Hz using linear interpolation. 
+
+As the data is indexed by the time of the recording, the time series of each experiment have to be normalized to enable comparison of the different time series. The first peak in the fore-aft acceleration signal in each recorded experiment serves as a normalization time stamp; Each signal is cropped, such that it starts 0.5 s prior to the first peak and last for 120 s. 
+
+Following time normalization, the data is filtered by applying a Butterworth high-pass filter with a cut-off frequency of 0.5 Hz, order 11 and padding of 25 s to remove any transient effects. The filter is applied forwards and backwards in time to remove any frequency response (phase delay). Afterwards, the accelerations and the angular velocities are integrated using a second order trapez type integration, yielding the velocity vector of the rod's tip and the torsion angle of the rod. To obtain the displacement vector, the velocity vector is filtered again with the same Butterworth filter, integrated again and finally both torsion angle and displacement vector are filtered one last time with the same Butterworth filter.
+
+To compare experimental measurements with finite element simulations and the 3-DoF model, the experimental results must be normalized to remove the influence of damping from the observed orbits. Therefore, the observed decay in amplitude over time is estimated using an exponential function of the following form:
+
+\begin{equation}
+    A = A_0 e ^ {\gamma t} + a
+\end{equation}
+
+Where $A_0$ is the initial amplitude, $\gamma$ is the damping coefficient and $a$ is a constant offset to account for the finite time series. To obtain orbits free of damping, the displacement vector is scaled by the exponential decay function. 
+
+\subsection{Experimental Results}
+
+\autoref{fig:low-mass}, \autoref{fig:medium-mass} and \autoref{fig:high-mass} each show the observed accelerations, the angular velocity and the absolute acceleration in the fore-aft-side-side plane as well as the corresponding orbits
 
 \textbf{ToDo}
 
 \begin{itemize}
-    \item Add time series to the section
-    \item estimate damping
-    \item add table with damping and stiffness for both linear motion and torsion
-    \item normalize data with damping to estimate undamped system
-    \item redo plots with proper axis etc
+    \item normalize time with eigenfrequencies? -> comparability of the time series would be enhanced
+    \item draw bas' drawings
 \end{itemize}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{results/experiment/low_mass_orbit.png}
-    \caption{Lissajous figures (orbits) for three different eccentric masses. \andy{[What are top's masses and moment of inertias of these configurations?]}}
-    \label{fig:low-mass-orbit}
-\end{figure}
+%%%
+% Low mass
+%%%
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{results/experiment/medium_mass_orbit.png}
-    \caption{Lissajous figures (orbits) for three different eccentric masses. \andy{[What are top's masses and moment of inertias of these configurations?]}}
-    \label{fig:medium-mass-orbit}
-\end{figure}
+\begin{figure*}[ht]
 
-\begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{results/experiment/high_mass_orbit.png}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{results/experiment/low_mass_acceleration.png}
+        \caption{}
+        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+        \label{fig:low-mass:acc}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{results/experiment/low_mass_orbit.png}
+        \caption{}
+        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+        \label{fig:low-mass:orbit}
+    \end{subfigure}
+    
     \caption{Lissajous figures (orbits) for three different eccentric masses. \andy{[What are top's masses and moment of inertias of these configurations?]}}
-    \label{fig:high-mass-orbit}
-\end{figure}
+    \label{fig:low-mass}
+\end{figure*}
+
+%%%
+% medium mass
+%%%
+
+\begin{figure*}
+
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{results/experiment/medium_mass_acceleration.png}
+        \caption{}
+        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+        \label{fig:medium-mass:acc}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{results/experiment/medium_mass_orbit.png}
+        \caption{}
+        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+        \label{fig:medium-mass:orbit}
+    \end{subfigure}
+    
+    \caption{Lissajous figures (orbits) for three different eccentric masses. \andy{[What are top's masses and moment of inertias of these configurations?]}}
+    \label{fig:medium-mass}
+\end{figure*}
+
+%%%
+% High mass
+%%%
+
+\begin{figure*}
+
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{results/experiment/high_mass_acceleration.png}
+        \caption{}
+        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+        \label{fig:high-mass:acc}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{results/experiment/high_mass_orbit.png}
+        \caption{}
+        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+        \label{fig:high-mass:orbit}
+    \end{subfigure}
+    
+    
+    \caption{Lissajous figures (orbits) for three different eccentric masses. \andy{[What are top's masses and moment of inertias of these configurations?]}}
+    \label{fig:high-mass}
+\end{figure*}
 
 \begin{figure}
     \centering
@@ -174,28 +247,198 @@ Results were post-processed using a Jupyter Notebook and Python3. The Jupyter No
 
 \clearpage
 
+% \section{Simulations (BAS)}
+% \label{sec:simulations}
+
+% \subsection{Simulation Setup}
+
+% \paragraph{Model}
+% A numerical model with six global degrees of freedom of the simplified system as shown in Figure \ref{fig:loading} was created. The support structure was modelled using linear one-dimensional finite element equations for undamped tension, torsion and bending of a cylinder with constant cross-section everywhere. Homogeneous linear elastic material was assumed and Euler Bernoulli beam theory was used for bending. The foundation was modelled with uncoupled springs, at the bottom of the support structure. 
+% % \begin{small}(Eq.\ref{eq:fea:K_fnd})
+% % \begin{equation}
+% % \mathbf{K}_{fnd} =
+% % \begin{bmatrix}
+% % k_{x} &  &  &   &   &   \\ &  k_{y} &  &   &   &   \\ &   &  k_{z} &  & 0  &   \\ &   &   &  k_{\phi } &  &   \\ &   &   &   &  k_{\theta } &  \\ &   &   &   &   &  k_{\psi } 
+% % \end{bmatrix}
+% % \label{eq:fea:K_fnd}
+% % \end{equation}
+% % \end{small}
+% The mass at the top of the structure was modelled as a concentrated mass with inertia, without eccentricity, and a point mass with eccentricity in both the horizontal and the vertical plane. The resulting mass matrix added to the top of the support structure is presented in Eq. \ref{eq:fea:Mtop}.
+% \begin{small}
+% \begin{equation}
+% \mathbf{M}_{con.} + \mathbf{M}_{ecc.}  = 
+% \begin{bmatrix}
+%  m_{e}+m_{c} & 0 & 0 & 0 & m_{e}\,z_{e} & -m_{e}\,y_{e}\\ 0 & m_{e}+m_{c} & 0 & -m_{e}\,z_{e} & 0 & m_{e}\,x_{e}\\ 0 & 0 & m_{e}+m_{c} & m_{e}\,y_{e} & -m_{e}\,x_{e} & 0\\ 0 & -m_{e}\,z_{e} & m_{e}\,y_{e} & I_{c}+\left({z_{e}}^2+{y_{e}}^2\right)\,m_{e} & -m_{e}\,x_{e}\,y_{e} & -m_{e}\,x_{e}\,z_{e}\\ m_{e}\,z_{e} & 0 & -m_{e}\,x_{e} & -m_{e}\,x_{e}\,y_{e} & I_{c}+\left({z_{e}}^2+{x_{e}}^2\right)\,m_{e} & -m_{e}\,y_{e}\,z_{e}\\ -m_{e}\,y_{e} & m_{e}\,x_{e} & 0 & -m_{e}\,x_{e}\,z_{e} & -m_{e}\,y_{e}\,z_{e} & I_{c}+\left({y_{e}}^2+{x_{e}}^2\right)\,m_{e} 
+% \end{bmatrix}
+% \label{eq:fea:Mtop}
+% \end{equation}
+% \end{small}
+% Taking gravity into account, the eccentricity of the top mass in the vertical plane introduces springs with  stiffness \(-g\,m_{e}\,z_{e}\) at top of the tower, for rotation about both horizontal axes and  the eccentricity of the top mass in the
+% horizontal plane introduces static force and moments, presented wth Eq. \ref{eq:fea:Fstat}.
+% \begin{small}
+% \begin{equation}
+% \mathbf{f}_g = 
+% \begin{bmatrix}
+%  0, & 0, & -g(\,m_{e}+m_{c}),& -g\,m_{e}\,y_{e}& g\,m_{e}\,x_{e},& 0
+% \end{bmatrix}^{T}
+% \label{eq:fea:Fstat}
+% \end{equation}
+% \end{small}
+% The mass and stiffness of the system, equal to the summation of the mass and stiffness of the foundation, top mass and cylinder, has the form:
+% \begin{equation}
+% \mathbf{\bar{M}}\ddot{\mathbf{u}}+\mathbf{\bar{K}}\mathbf{u} = \mathbf{\bar{f}} 
+% \end{equation}
+
+% where \(\mathbf{\bar{M}} = \mathbf{M}_{cyl.}+\mathbf{M}_{conc.}+\mathbf{M}_{ecc.}\), $\mathbf{\bar{K}} = \mathbf{k}_{cyl}+\mathbf{K}_{ecc}+\mathbf{K}_{fnd}$ and  $\mathbf{\bar{f}} = \mathbf{f}_{g}+\mathbf{f}_{app}$.  
+
+
+
+
+
+
+
+
+% A numerical model of the simplified system as shown in Figure \ref{fig:loading} was made, . The support structure was modelled with on linear one-dimensional finite element equations for tension, torsion and bending. Homogeneous linear elastic material was assumed and Euler Bernoulli beam theory was used for bending. It is assumed damping does not affect the formation of orbital motion and is thereby neglected, and thus the model can be described by \( \mathbf{M}\ddot{\mathbf{u}}+\mathbf{K}\mathbf{u} = \mathbf{F} \).
+% The support structure is modelled as a vertical cylinder with constant cross-section. The foundation is modelled by six springs, one spring for each degree of freedom of the system. The eccentric mass is modelled as a cube with distributed mass, without eccentricity, and an additional eccentric point mass. The eccentricity and related coupling of the point mass is linearised and considered in the horizontal plane only (rotation about vertical axis), since for tower top motions of offshore wind turbines rotation about horizontal axes is assumed negligible. The resulting mass matrix for the distributed mass and eccentric point mass, added to the top node of the structural model, is presented below.
+% \begin{equation}
+%     M = 
+% \end{equation}
+% \begin{enumerate}
+%     \item add mass matrix
+% \end{enumerate}
+
+% \paragraph{Loads}
+% For the simulations,  initial deformation due to an horizontal force, applied at the centre of the top of the support structure, and gravitational force was considered. Multiple combinations of amplitude and direction of the initial deformation were considered, with and without gravitational force. In addition, the top mass and its eccentricity were varied. 
+
+% % For the simulations, initial deformation and static load due to dead-weight were considered. No dynamic forces were applied. Initial deformations for two cases were obtained by applying force in the horizontal plane at the centre of the top of the model, with an angle of 90 degree and 85 degree witch respect to the eccentricity of the point mass. For each force orientation, a simulation with and simulation without gravity was done. 
+
+
+% \subsection{Simulation Results}
+
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.5\linewidth]{manuscript/figures/Simulation_Orbits_LC__45degrees.png}
+%     \caption{Orbits formation - without dead weight}
+%     \label{fig:fea:45degrNograv}
+% \end{figure}
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.5\linewidth]{manuscript/figures/Simulation_Orbits_LC__deadweight_45degrees.png}
+%     \caption{Orbits formation - with dead weight}
+%     \label{fig:fea:45degrWithgrav}
+% \end{figure}
+% \clearpage
+
 \section{Simulations (BAS)}
 \label{sec:simulations}
 
 \subsection{Simulation Setup}
 
 \paragraph{Model}
-A structural model was built to represent the simplified system as shown in Figure \ref{fig:loading}. The support structure was modelled with on linear one-dimensional finite element equations for tension, torsion and bending. Homogeneous linear elastic material was assumed and Euler Bernoulli beam theory was used for bending. It is assumed damping does not affect the formation of orbital motion and is thereby neglected, and thus the model can be described by \( \mathbf{M}\ddot{\mathbf{u}}+\mathbf{K}\mathbf{u} = \mathbf{F} \).
-The support structure is modelled as a vertical cylinder with constant cross-section. The foundation is modelled by six springs, one spring for each degree of freedom of the system. The eccentric mass is modelled as a cube with distributed mass, without eccentricity, and an additional eccentric point mass. The eccentricity and related coupling of the point mass is linearised and considered in the horizontal plane only (rotation about vertical axis), since for tower top motions of offshore wind turbines rotation about horizontal axes is assumed negligible. The resulting mass matrix for the distributed mass and eccentric point mass, added to the top node of the structural model, is presented below.
-% \begin{equation}
-%     M = 
-% \end{equation}
-\begin{enumerate}
-    \item add mass matrix
-\end{enumerate}
+A numerical model based on the simplified system as shown in Figure \ref{fig:loading} was created using MATLAB, presented in Figure \ref{fig:fea:model}. The support structure was modelled as a hollow cylinder made of  homogeneous linear elastic material and with a constant cross-section along its length, supported by linear uncoupled springs. The nacelle was modelled as a concentrated mass with inertia and a point mass with eccentricity in both the horizontal and the vertical plane.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{manuscript/figures/FEModel.png}
+    \caption{FE model}
+    \label{fig:fea:model}
+\end{figure}
+The equations of motion of the undamped system, in the following form,
+\begin{equation}
+\mathbf{\bar{M}}\ddot{\mathbf{u}}+\mathbf{\bar{K}}\mathbf{u} = \mathbf{\bar{f}} 
+\end{equation}
+was obtained by superposition of the equations of motions of the concentrated and eccentric point mass, the support springs and the support structure. The support structure was modelled based on linear one-dimensional finite element equations for six degrees in the global coordinate system. Euler Bernoulli beam theory was used for bending. Using a rotation matrix based on Tait–Bryan angles, the equations of motions for the concentrated and eccentric top mass were derived with the Euler Lagrange equation. Using Taylor series for linearisation, the  mass matrix (Eq. \ref{eq:fea:Mtop}), stiffness matrix (Eq. \ref{eq:fea:K_m_ecc}) and gravitational force (Eq. \ref{eq:fea:Fstat}) were found for the six global degrees of freedom. The stiffness matrix of the support strings is presented in Eq. \ref{eq:fea:K_fnd}. 
+\begin{small}
+    \begin{equation}
+        \mathbf{M}_{m_c} + \mathbf{M}_{m_e}  = 
+        \begin{bmatrix}
+         m_{e}+m_{c} & 0 & 0 & 0 & m_{e}\,z_{e} & -m_{e}\,y_{e}\\ 0 & m_{e}+m_{c} & 0 & -m_{e}\,z_{e} & 0 & m_{e}\,x_{e}\\ 0 & 0 & m_{e}+m_{c} & m_{e}\,y_{e} & -m_{e}\,x_{e} & 0\\ 0 & -m_{e}\,z_{e} & m_{e}\,y_{e} & I_{c}+\left({z_{e}}^2+{y_{e}}^2\right)\,m_{e} & -m_{e}\,x_{e}\,y_{e} & -m_{e}\,x_{e}\,z_{e}\\ m_{e}\,z_{e} & 0 & -m_{e}\,x_{e} & -m_{e}\,x_{e}\,y_{e} & I_{c}+\left({z_{e}}^2+{x_{e}}^2\right)\,m_{e} & -m_{e}\,y_{e}\,z_{e}\\ -m_{e}\,y_{e} & m_{e}\,x_{e} & 0 & -m_{e}\,x_{e}\,z_{e} & -m_{e}\,y_{e}\,z_{e} & I_{c}+\left({y_{e}}^2+{x_{e}}^2\right)\,m_{e} 
+        \end{bmatrix}
+        \label{eq:fea:Mtop}
+    \end{equation}
+\end{small}
 
-\paragraph{Loads}
-For the simulations, initial deformation and static load due to dead-weight were considered. No dynamic forces were applied. Initial deformations for two cases were obtained by applying force in the horizontal plane at the centre of the top of the model, with an angle of 90 degree and 85 degree witch respect to the eccentricity of the point mass. For each force orientation, a simulation with and simulation without gravity was done. 
+\begin{small}
+    \begin{equation}
+        \mathbf{K}_{m_e} =
+        \begin{bmatrix}
+       0 &  &  &   &   &   \\ &  0 &  &   & 0  &   \\ &   &  0 &  &   &   \\ & &   &  -g\,m_{e}\,z_{e} &  &   \\ &   0  &   &   &  -g\,m_{e}\,z_{e} &  \\ &   &   &   &   &  0
+        \end{bmatrix}
+        \label{eq:fea:K_m_ecc}
+    \end{equation}
+\end{small}
 
+\begin{small}
+    \begin{equation}
+        \mathbf{f}_{m_c} + \mathbf{f}_{m_e} = 
+        \begin{bmatrix}
+         0\\ 0\\ -g(\,m_{e}+m_{c})\\ -g\,m_{e}\,y_{e}\\ g\,m_{e}\,x_{e} \\ 0
+        \end{bmatrix}
+        \label{eq:fea:Fstat}
+    \end{equation}
+\end{small}
+
+\begin{small}
+    \begin{equation}
+        \mathbf{K}_{fnd} =
+        \begin{bmatrix}
+        k_{x} &  &  &   &   &   \\ &  k_{y} &  &   & 0  &   \\ &   &  k_{z} &  &   &   \\ & &   &  k_{\phi } &  &   \\ &   0  &   &   &  k_{\theta } &  \\ &   &   &   &   &  k_{\psi } 
+        \end{bmatrix}
+        \label{eq:fea:K_fnd}
+    \end{equation}
+\end{small}
+
+\paragraph{Loads }
+Gravitational force and initial deformation due to an horizontal force applied at the centre of the top of the support structure were considered. Multiple combinations of amplitude and direction of the initial deformation were simulated, for load cases with and without gravitational force. In addition, the top mass and its vertical and horizontal eccentricity were varied.  To account for limitations due to linearization of the numerical model, small initial deformations were applied.
 
 \subsection{Simulation Results}
+The response to gravitational force and an initial deformation due to an horizontal force applied at the top of the  support structure with an angle of 45\textdegree with respect to the eccentricity of the point mass is presented in Figure \ref{fig:fea:lissa_simu_results}. The pattern in Figure  (\ref{fig:fea:lissa_orbits}),  similar to the pattern found with the experiments, as presented in Figure \ref{fig:high-mass:orbit}, can be described as a Lissajous curve. 
+
+To compare the effect of gravitational force and vertical eccentricity of the point mass, the the response  for a load cases with- and without gravitational force and vertical eccentricity are presented in Figure \ref{fig:fea:simres_gravitational_force_comparison}. These responses result from simulations with a short time span and would have shown a similar pattern to the response presented in Figure\ref{fig:fea:lissa_simu_results}, (\ref{fig:fea:lissa_orbits}), if the simulation time span was extended. 
+
+\begin{figure*}
+\centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{manuscript/figures/FEA_simu_Lissa_Displacement.png}
+        % \caption{}
+        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+        \caption{\small{Horizontal displacement and rotation about vertical axis}}
+        \label{fig:fea:lissa_displ}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{manuscript/figures/FEA_simu_Lissa_Orbits.png}
+        \caption{\small{Formation of obits in the horizontal plane}}
+        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+        \label{fig:fea:lissa_orbits}
+    \end{subfigure}
+\caption{FE simulation results: Lissajous curve}
+    \label{fig:fea:lissa_simu_results}
+\end{figure*}
 
 
+\begin{figure*}
+\centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{manuscript/figures/FEA_simu_Orbits_No_grav.png}
+        % \caption{}
+        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+        \caption{\small{Without gravitational force}}
+        \label{fig:fea:simres_nograp}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{manuscript/figures/FEA_simu_Orbits_With_grav.png}
+        \caption{\small{With gravitational force}}
+        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+        \label{fig:fea:simres_withgrav}
+    \end{subfigure}
+\caption{FE simulation results: with and without gravitational force}
+    \label{fig:fea:simres_gravitational_force_comparison}
+\end{figure*}
 
 \clearpage
 
@@ -284,40 +527,39 @@ The vibration model can reproduce the type of motions that were measured in the 
 \section{Discussion (ALL)}
 \label{sec:discussion}
 
+\subsection{Simulation}
+With the linear numerical model, similar response patterns can be found to the patterns found with the experiments. The experiments were performed for initial deformations associated with geometrical non-linear effects which are not accounted for by the numerical model. Similar response patterns were obtained with the experiments and simulations, which indicates that the geometrical non-linear effects can be neglected. Simulations for load cases with- and without gravitational force and vertical eccentricity of point mass were performed, for eccentricity up to one thirtieth of the height of the support structure. The effect of  gravitational force and vertical eccentricity appeared negligible. Thereby, it is expected that a simple model with three degrees of freedom, namely translation in both horizontal direction and rotation in the horizontal plane, can be used instead of the rather complex FE model with six global degrees of freedom.
+
+
 \begin{itemize}
-    \item future work
-    \item implications for offshore wind
+    \item [Experiment]
+    \begin{itemize}
+        \item Initial and boundary conditions are hard to control. Experiment is sensitive to rod's orientation with respect to gravity. 
+        \item more thorough parameter variation needed
+        \item higher precision... 
+    \end{itemize}
+    \item [FE Simulations]
+    \begin{itemize}
+        \item 
+    \end{itemize}
+    \item [3 DoF Model]
+    \begin{itemize}
+        \item Numerical scheme
+        \item Initial and boundary conditions estimated from the experiment do not yield the same orbits
+        \item parameter study is needed
+        \item Rigorous mathematical derivation to get from a cantileverd beam formulation (Bernoulli? Timoshenkov?) to a 3 DoF model.
+    \end{itemize}
+    \item[Overall]
+    \begin{itemize}
+        \item In all three approaches the orbits can be reproduced
+        \item Orbit shapes compare, initial and boundary conditions do not
+        \item Coupling effect is there, however: does it compare with offshore wind turbines?
+    \end{itemize}
 \end{itemize}
 
 \clearpage
 
 \bibliographystyle{unsrtnat}
-\bibliography{references}  %%% Uncomment this line and comment out the ``thebibliography'' section below to use the external .bib file (using bibtex) .
-
-
-%%% Uncomment this section and comment out the \bibliography{references} line above to use inline references.
-% \begin{thebibliography}{1}
-
-% 	\bibitem{kour2014real}
-% 	George Kour and Raid Saabne.
-% 	\newblock Real-time segmentation of on-line handwritten arabic script.
-% 	\newblock In {\em Frontiers in Handwriting Recognition (ICFHR), 2014 14th
-% 			International Conference on}, pages 417--422. IEEE, 2014.
-
-% 	\bibitem{kour2014fast}
-% 	George Kour and Raid Saabne.
-% 	\newblock Fast classification of handwritten on-line arabic characters.
-% 	\newblock In {\em Soft Computing and Pattern Recognition (SoCPaR), 2014 6th
-% 			International Conference of}, pages 312--318. IEEE, 2014.
-
-% 	\bibitem{hadash2018estimate}
-% 	Guy Hadash, Einat Kermany, Boaz Carmeli, Ofer Lavi, George Kour, and Alon
-% 	Jacovi.
-% 	\newblock Estimate and replace: A novel approach to integrating deep neural
-% 	networks with existing applications.
-% 	\newblock {\em arXiv preprint arXiv:1804.09028}, 2018.
-
-% \end{thebibliography}
-
+\bibliography{references}  %%% Uncomment this line and comment out the ``thebibliography'' section 
 
 \end{document}
