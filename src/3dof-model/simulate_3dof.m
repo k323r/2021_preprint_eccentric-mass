@@ -1,9 +1,7 @@
-MAX_TIME = 30;
-DO_ANIMATE = 0;
-DO_USE_OFFSHORE = 0;
+SYSTEM = 'A';
 
+DO_ANIMATE = 0;
 DO_WRITE_GIF = 0;
-filename = 'trajectory_tabletop.gif';
 
 % System A, the table top experiment.
 A.m1 = 0.0093; % in kg
@@ -11,22 +9,61 @@ A.m2 = 0.044; % in kg
 A.k1 = 4.5; % in N/m
 A.k2 = 0.001 * 180 / pi; % in Nm/rad
 A.d = 0.038; % in m
-A.I = 0.00005; % in kg m^2 
+A.I = 0.00005; % in kg m^2
+A.x0 = 0.1;
+A.y0 = 0.1;
+A.xdot0 = 0;
+A.ydot0 = 0;
+A.max_time = 20;
+A.label = 'tabletop';
 
-% System B, the offshore wind turbine.
-B.m1 = 320 * 10^3;
-B.m2 = 450 * 10^3;
-B.k1 = 3.4 * 10^6;
-B.k2 = 3.6 * 10^9;
-B.d = 0.28;
-B.I = 3.6 * 10^7;
 
-damp_theta = 0.0001;
+% System B, the typical offshore wind turbine.
+% B.m1 = 320 * 10^3;
+% B.m2 = 450 * 10^3;
+% B.k1 = 3.4 * 10^6;
+% B.k2 = 3.6 * 10^9;
+% B.d = 0.28;
+% B.I = 3.6 * 10^7;
+B.m1 = 300 * 10^3;
+B.m2 = 400 * 10^3;
+B.k1 = 3 * 10^6;
+B.k2 = 3 * 10^9;
+B.d = 0.3;
+B.I = 4 * 10^7;
+B.x0 = 1;
+B.y0 = 1;
+B.xdot0 = 1;
+B.ydot0 = 0;
+B.max_time = 120;
+B.label = 'turbine_typical';
 
-if DO_USE_OFFSHORE
-    S = B;
-else
-    S = A;
+% System C, the unfvaroable offshore wind turbine.
+C.m1 = 300 * 10^3;
+C.m2 = 400 * 10^3;
+C.k1 = 3 * 10^6;
+C.k2 = 3 * 10^8;
+C.d = 1;
+C.I = 8 * 10^7;
+C.x0 = 1;
+C.y0 = 1;
+C.xdot0 = 1;
+C.ydot0 = 0;
+C.max_time = 120;
+C.label = 'turbine_unfavorable';
+
+
+damp_theta = 0.0001; % 0.0001 for  numerical stability (problems with system A otherwise).
+
+switch SYSTEM
+    case 'A'
+        S = A;
+    case 'B'
+        S = B;
+    case 'C'
+        S = C;
+    otherwise
+        warning('Unexpected system.')
 end
 m1 = S.m1;
 m2 = S.m2;
@@ -34,16 +71,19 @@ k1 = S.k1;
 k2 = S.k2;
 d = S.d;
 I = S.I;
+max_time = S.max_time;
 
 
 % Initial conditions.
-start_x = 0.1;
-start_y = 0.1;
+x0 = S.x0;
+y0 = S.y0;
+xdot0 = S.xdot0;
+ydot0 = S.ydot0;
 
 f0_bending = 1 / (2 * pi) * sqrt(k1 / (m1 + m2))
 f0_torsion = 1 / (2 * pi) * sqrt(k2 / (I + m2 * d^2))
 
-t = [0:0.0001:MAX_TIME];
+t = [0:0.0001:max_time];
 x = nan(size(t));
 u = nan(size(t));
 udot = nan(size(t));
@@ -55,11 +95,11 @@ omega = nan(size(t));
 omegadot = nan(size(t));
 
 
-x(1) = start_x;
-u(1) = 0;
+x(1) = x0;
+u(1) = xdot0;
 udot(1) = 0;
-y(1) = start_y;
-v(1) = 0;
+y(1) = y0;
+v(1) = ydot0;
 vdot(1) = 0;
 theta(1) = 0;
 omega(1) = 0;
@@ -101,26 +141,50 @@ for i = 2 : length(t)
     theta(i) = theta(i - 1) + omega(i) * dt;
 end
 
-fig1 = figure();
+fig1 = figure('position', [100 100 1000 700]);
+layout = tiledlayout(3, 4);
+nexttile(1, [1, 4])
 yyaxis left
-plot(t,x,t,y)
+h1 = plot(t, x, '--k', t, y, ':k');
 ylabel('Position (m)')
+ylim(max(abs(h1(1).Parent.YLim)).*[-1.01 1.01])
 yyaxis right
-h = plot(t, theta / pi * 180)
-ylim(max(abs(h.Parent.YLim)).*[-1 1])
+h2 = plot(t, theta / pi * 180, '-b');
+ylim(max(abs(h2.Parent.YLim)).*[-1 1])
 ylabel('\theta (deg)');
-
 xlabel('Time (s)');
-legend('x', 'y', '\theta')
+legend('x', 'y', '\theta', 'box', 'off', 'orientation','horizontal');
+ax = gca;
+ax.YAxis(1).Color = 'k';
+ax.YAxis(2).Color = 'b';
+box off
 
-fig2 = figure();
-plot(x, y, '-');
-hold on
-plot(x(1), y(1), 'xr')
-text(x(1), y(1), 'start', 'color', 'r')
-xlabel('x (m)');
-ylabel('y (m)');
-axis equal
+% Plot Lissajous figures.
+nr_plots = 8;
+fsize = 6;
+end_time_indices = ceil([1 : nr_plots] / nr_plots * length(t));
+for i = 1 : nr_plots
+    nexttile()
+    end_time_index = end_time_indices(i);
+    end_time = t(end_time_index);
+    plot(x(1:end_time_index), y(1:end_time_index), '-k');
+    hold on
+    plot(x(1), y(1), 'xk', 'linewidth', 1)
+    xdelta = 0.08 * x(1);
+    text(x(1)+ xdelta, y(1), 't = 0 s', 'color', 'k', 'fontsize', fsize)
+    text(x(end_time_index)+ xdelta, y(end_time_index), ['t = ' num2str(end_time) ' s'], 'color', 'k', ...
+        'backgroundcolor', 'white', 'fontsize', fsize)
+    plot(x(end_time_index), y(end_time_index), 'ok', 'markerfacecolor', 'k');
+    xlabel('x (m)');
+    ylabel('y (m)');
+    axis equal
+    lim_pos = max(abs([min(x) max(x) min(y) max(y)])) * 1.1;
+    xlim([-lim_pos lim_pos])
+    ylim([-lim_pos lim_pos])
+    box off
+end
+
+exportgraphics(layout, [S.label '.png'], 'resolution', 300)
 
 if DO_ANIMATE
     fig3 = figure();
@@ -147,7 +211,7 @@ if DO_ANIMATE
     annotation('textbox', [0.75, 0.5, 0.1, 0.1], 'String', s)
 
     
-    lim_val = sqrt(start_x^2 + start_y^2);
+    lim_val = sqrt(x0^2 + y0^2);
     factor = 1.1;
     axis([-lim_val, lim_val, -lim_val, lim_val] * factor)
     step_size = 50;
@@ -171,9 +235,9 @@ if DO_ANIMATE
             [imind,cm] = rgb2ind(im,16); 
             % Write to the GIF File 
             if i == 1 
-              imwrite(imind,cm,filename,'gif', 'Loopcount',inf); 
+              imwrite(imind,cm,['trajectory_' S.label '.gif'],'gif', 'Loopcount',inf); 
             else 
-              imwrite(imind,cm,filename,'gif','WriteMode','append'); 
+              imwrite(imind,cm,['trajectory_' S.label '.gif'],'gif','WriteMode','append'); 
             end 
         end
     end
