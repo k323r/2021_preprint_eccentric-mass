@@ -1,4 +1,4 @@
-SYSTEM = 'A';
+SYSTEM = 'C';
 
 DO_ANIMATE = 0;
 DO_WRITE_GIF = 0;
@@ -153,7 +153,7 @@ h2 = plot(t, theta / pi * 180, '-b');
 ylim(max(abs(h2.Parent.YLim)).*[-1 1])
 ylabel('\theta (deg)');
 xlabel('Time (s)');
-legend('x', 'y', '\theta', 'box', 'off', 'orientation','horizontal');
+legend('x', 'y', '\theta', 'box', 'off', 'orientation','horizontal', 'location', 'northoutside');
 ax = gca;
 ax.YAxis(1).Color = 'k';
 ax.YAxis(2).Color = 'b';
