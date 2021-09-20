@@ -25,7 +25,7 @@
 %\date{September 9, 1985}	% Here you can change the date presented in the paper title
 %\date{} 					% Or removing it
 
-\author{ \href{https://orcid.org/0000-0000-0000-0000}{\includegraphics[scale=0.06]{orcid.pdf}\hspace{1mm} Aljoscha Sander}\thanks{Use footnote for providing further information about author (webpage, alternative address)---\emph{not} for acknowledging funding agencies.} \\
+\author{ \href{https://orcid.org/0000-0001-8717-9688}{\includegraphics[scale=0.06]{orcid.pdf}\hspace{1mm} Aljoscha Sander} \\
 	Energy and Sustainability Research Institute Groningen\\
 	University of Groningen\\
 	Groningen, the Netherlands \\
@@ -83,35 +83,35 @@ pdfkeywords={First keyword, Second keyword, More},
 \section{Introduction}
 \label{sec:introduction}
 
-Offshore wind is growing continuously and is on its way to become one of the pillars of green energy. Recent cost reductions in offshore wind (29 \%) have mostly been due to increasing turbine size \citep{irenaRenewablePowerGeneration2020}. Increasing turbine size and numbers, however, leads to increasing difficulties during installation: larger components are more difficult to handle and require more space on an installation vessel. Today, most turbines are installed component by component, including the blades, a process generally referred to as single blade installation \citep{jiangInstallationOffshoreWind2021}. Blades are installed utilizing a specialized tool, usually referred to as an installation yoke, that securely fastens the blade during craning operations. Once the blade reaches hub height, a guiding pin is used to land the blade's bolts in the corresponding holes in the rotor flange. During this operation, relative motion between the blade root and the rotor hub greatly hampers the secure landing of the blade in the rotor's flange. As these relative motions are driven by environmental loading on both the turbine and the blade, they are difficult to understand and even more to predict. 
+Offshore wind is growing continuously and is on its way to become one of the pillars of green energy. Recent cost reductions in offshore wind (29 \%) have mostly been due to increasing turbine size \citep{irenaRenewablePowerGeneration2020}. Increasing turbine size and numbers, however, leads to increasing difficulties during installation: larger components are more difficult to handle and require more space on an installation vessel. Today, most turbines are installed component by component, including the blades, a process generally referred to as single blade installation \citep{jiangInstallationOffshoreWind2021}. Blades are installed utilizing a specialized tool, usually referred to as an installation yoke, that securely fastens the blade during craning operations. Once the blade reaches hub height, a guiding pin is used to land the blade's bolts in the corresponding holes in the rotor flange. During this operation, relative motion between the blade root and the rotor hub greatly hampers the secure landing of the blade in the rotor's flange. As these relative motions are driven by environmental loading on both the turbine and the blade, they are difficult to understand and even more so to predict. 
 
-In a measurement campaign during the installation of the offshore wind farm \textit{Trianel Windpark Borkum II} off the coast of Germany in the German Bight, the kinematics of blades and partially installed turbines were investigated \citep{sanderRelativeMotionSingle2020,  sanderMONITORINGOFFSHOREWIND2020, sanderOscillationsOffshoreWind2020}. These measurements revealed, that the partially installed turbines were displaying intricate patterns of motions — orbits — during single blade installation. A two-minute orbit captured during the installation of the wind park \textit{Trianel Windpark Borkum II} is shown in \autoref{fig:orbit}. These orbits show that amplitude and direction of tower top motion may occur swiftly and with large rates of change. It stands to reason that these orbits in turn influence the installation of blades and may even be responsible for an increase in installation difficulty.
+In a measurement campaign conducted during the installation of the offshore wind farm \textit{Trianel Windpark Borkum II} off the coast of Germany in the German Bight, the kinematics of blades and partially installed turbines were investigated \citep{sanderRelativeMotionSingle2020,  sanderMONITORINGOFFSHOREWIND2020, sanderOscillationsOffshoreWind2020}. These measurements revealed, that the partially installed turbines were displaying intricate patterns of motions — orbits — during single blade installation. A two-minute orbit captured during the installation of the wind park \textit{Trianel Windpark Borkum II} is shown in \autoref{fig:orbit}. These orbits show that amplitude and direction of tower top motion may appear swiftly and with large rates of change. It stands to reason that these orbits in turn influence the installation of blades and may even be responsible for an increase in installation difficulty.
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.7\linewidth]{manuscript/figures/installation_alt2.png}
+    \includegraphics[width=0.7\linewidth]{figures/installation_alt2.png}
     \caption{Formation of orbits as observed during the installation of the offshore wind park \textit{Trianel Windpark Borkum II}. Note: the orbits are not to scale to enhance visibility.}
     \label{fig:orbit}
 \end{figure}
 
-Several mechanisms may in theory explain the formation of orbits. In this paper, we present a coupling mechanism that intrinsically leads to the formation of orbits in a cantilevered beam. 
+Several mechanisms may in theory explain the formation of orbits. In this paper, we present a coupling mechanism that intrinsically leads to the formation of orbits in a cantilevered beam with an eccentric mass present. 
 
-In this paper, we focus on one specific state of an offshore wind turbine during installation: the hammerhead configuration. In this configuration, the foundation, transition piece, tower, and nacelle have already been installed, and the next installation step would be the installation of the first blade. In this configuration, the turbine is top heavy and, due to the nacelle's and rotor's weight, also nose-heavy. In the case of the turbines installed at \textit{Trianel Windpark Borkum II}, the centre of gravity of the nacelle is approximately 0.3 m shifted towards the rotor with respect to the tower axis. \autoref{fig:loading} depicts the hammerhead configuration as well as the simplified mechanical system derived to investigate the behaviour of partially installed turbines during installation. 
+We focus on one specific state of an offshore wind turbine during installation: the hammerhead configuration. In this configuration, the foundation, transition piece, tower, and nacelle have already been installed, and the next installation step would be the installation of the first blade. In this configuration, the turbine is top heavy and, due to the nacelle's and rotor's weight, also nose-heavy. In the case of the turbines installed at \textit{Trianel Windpark Borkum II}, the centre of gravity of the nacelle is approximately 0.3 m shifted towards the rotor with respect to the tower axis. \autoref{fig:loading} depicts the hammerhead configuration as well as the simplified mechanical system derived to investigate the behaviour of partially installed turbines during installation. 
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.7\linewidth]{manuscript/figures/loading_3.pdf}
+    \includegraphics[width=0.7\linewidth]{figures/loading_3.pdf}
     \caption{Hammerhead configuration (left) and simplified mechanical model of the hammerhead configuration (right).}
     \label{fig:loading}
 \end{figure}
 
-This system represents a cantilevered beam with an eccentric mass at the free end. We hypothesize that the inertia of the eccentric mass leads to torsion of the cantilevered beam if the tower vibrates transversally. Twisting the tower has two effects: a) the circular motion of the eccentric mass has a component perpendicular to the initial direction of motion, and thus momentum from that circular motion transfers into the perpendicular direction. b) twisting the tower leads to a torsional oscillation of the eccentric mass around the tower axis. The torsional motion of the eccentric mass in illustrated in \autoref{fig:kinematics}.
+The simplified system is a cantilevered beam with an eccentric mass at the free end. We hypothesize that the inertia of the eccentric mass leads to torsion of the cantilevered beam if the tower vibrates transversally. Twisting the tower along its main axis has two effects: a) the circular motion of the eccentric mass has a component perpendicular to the initial direction of motion, and thus momentum from that circular motion transfers into the perpendicular direction. b) twisting the tower leads to a torsional oscillation of the eccentric mass around the tower axis. The torsional motion of the eccentric mass in illustrated in \autoref{fig:kinematics}.
 
 \clearpage
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.7\linewidth]{manuscript/figures/kinematics.pdf}
+    \includegraphics[width=0.7\linewidth]{figures/kinematics.pdf}
     \caption{Simplified kinematics of an eccentric mass undergoing harmonic oscillations.}
     \label{fig:kinematics}
 \end{figure}
@@ -125,24 +125,24 @@ The paper is subdivided into four sections: first, results from a table-top expe
 
 \subsection{Experimental Setup}
 
-As a first proof of concept, we built a table-top experiment that allows us to demonstrate the effect of an eccentric mass on the vibration of a cantilevered beam. As a beam, we chose a wooden rod (massive beech, 0.006 m diameter) with a free length of 0.7 m. At the free end of the rod, we placed a 3D-printed lever that allowed us to add M8 bolts (0.028 m length, 0.0129 kg) to control the amount of eccentric mass. Lever length was 0.082 m weighing a total of XX kg. A second rod made of fibre glass (diameter 0.008 m) was placed next to the cantilevered beam. \autoref{fig:setup} shows the experimental setup. The second rod was used to displace the cantilevered beam from its resting position  by pulling the cantilevered beam towards the second rod using a thin thread. The initial displacement of the top of the rod was 0.135 m and three different masses (no bolts, two bolts, four bolts) were tested in the experiment. To release the cantilevered beam from it initial, displaced position, the thread set on fire using a lighter. While this release mechanism seems somewhat archaic, it ensures that no external torque is added to the system upon release. For each mass, the experiment was repeated three times. A MEMS-based inertial measurement unit (MPU 9255, InvenSense TDK, Tokyo, Japan) placed on top of the cantilevered beam measured linear acceleration and angular velocity with a sampling rate of 100 Hz. Measurements were recorded using a Raspberry Pi 400 and a jupyter notebook with python3. All data and the corresponding code is available on github: \url{https://github.com/k323r/Preprint-Eccentric-Mass}.
+As a first proof of concept, we built a table-top experiment that allows us to demonstrate the effect of an eccentric mass on the vibration of a cantilevered beam. As a beam, we chose a wooden rod (massive beech, 0.006 m diameter) with a free length of 0.7 m. At the free end of the rod, we placed a 3D-printed lever that allowed us to add M8 bolts (0.028 m length, 0.0129 kg) to control the amount of eccentric mass. Lever length was 0.082 m weighing a total of 0.026 kg. A second rod made of fibre glass (diameter 0.008 m) was placed next to the cantilevered beam. \autoref{fig:setup} shows the experimental setup. The second rod was used to displace the cantilevered beam from its resting position  by pulling the cantilevered beam towards the second rod using a thin cotton thread. The initial displacement of the top of the rod was 0.135 m and three different masses (no bolts, two bolts, four bolts) were tested in the experiment. To release the cantilevered beam from it initial, displaced position, the thread was set on fire using a lighter. While this release mechanism seems somewhat archaic, it ensures that no external torque is added to the system upon release. For each mass, the experiment was repeated three times. A MEMS-based inertial measurement unit (MPU 9255, InvenSense TDK, Tokyo, Japan) placed on top of the cantilevered beam measured linear acceleration and angular velocity with a sampling rate of 100 Hz. Measurements were recorded using a Raspberry Pi 400 and a jupyter notebook with python3. All data and the corresponding code is available on github: \url{https://github.com/k323r/2021_preprint_eccentric-mass}.
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.5\linewidth]{manuscript/figures/setup.png}
+    \includegraphics[width=0.5\linewidth]{figures/setup.png}
     \caption{Experimental setup}
     \label{fig:setup}
 \end{figure}
 
 The following post-processing steps have been applied to the recorded data:
 
-First, obtained accelerations in fore-aft and side-side direction are resampled to 50 Hz using linear interpolation. 
+First, obtained accelerations in fore-aft and side-side direction were resampled to 50 Hz using linear interpolation. 
 
-As the data is indexed by the time of the recording, the time series of each experiment have to be normalized to enable comparison of the different time series. The first peak in the fore-aft acceleration signal in each recorded experiment serves as a normalization time stamp; Each signal is cropped, such that it starts 0.5 s prior to the first peak and lasts for 120 s. 
+As the data is indexed by the time of the recording, the time series of each experiment had to be normalized to enable comparison of the different time series. The first peak in the fore-aft acceleration signal in each recorded experiment served as a normalization time stamp; Each signal was cropped, such that it starts 0.5 s prior to the first peak and lasts for 120 s. 
 
-Following time normalization, the data is filtered by applying a Butterworth high-pass filter with a cut-off frequency of 0.5 Hz, order 11 and padding of 25 s to remove any transient effects. The filter is applied forwards and backwards in time to remove any frequency response (phase delay). Afterwards, the accelerations and the angular velocities are integrated using a second order trapeze type integration, yielding the velocity vector of the rod's tip and the torsion angle of the rod. To obtain the displacement vector, the velocity vector is filtered again with the same Butterworth filter, integrated again and finally both torsion angle and displacement vector are filtered one last time with the same Butterworth filter.
+Following time normalization, the data was filtered by applying a Butterworth high-pass filter with a cut-off frequency of 0.5 Hz, order 11 and padding of 25 s to remove any transient effects. The filter was applied forwards and backwards in time to remove any frequency response (phase delay). Afterwards, the accelerations and the angular velocities were integrated using a second order trapeze type integration, yielding the velocity vector of the rod's tip and the torsion angle of the rod. To obtain the displacement vector, the velocity vector was filtered again with the same Butterworth filter, integrated again and finally both torsion angle and displacement vector were filtered one last time with the same Butterworth filter.
 
-To compare experimental measurements with finite element simulations and the 3-DoF model, the observed amplitude from the experimental results must be normalized to remove the influence of damping from the observed orbits. Therefore, the observed decay in amplitude over time is estimated using an exponential function of the following form:
+To compare experimental measurements with finite element simulations and the 3-DoF model (both without damping), the observed displacement from the experimental results was normalized to remove the influence of damping from the observed orbits. To this end, the observed decay in displacement amplitude over time is estimated using an exponential function of the following form:
 
 \begin{equation}
     A = A_0 e ^ {\gamma t} + a
@@ -163,14 +163,14 @@ where $A_0$ is the initial amplitude, $\gamma$ is the damping coefficient and $a
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{results/experiment/low_mass_acceleration.png}
+        \includegraphics[width=\textwidth]{../results/experiment/low_mass_acceleration.png}
         \caption{}
         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
         \label{fig:low-mass:acc}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{results/experiment/low_mass_orbit.png}
+        \includegraphics[width=\textwidth]{../results/experiment/low_mass_orbit.png}
         \caption{}
         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
         \label{fig:low-mass:orbit}
@@ -189,14 +189,14 @@ where $A_0$ is the initial amplitude, $\gamma$ is the damping coefficient and $a
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{results/experiment/medium_mass_acceleration.png}
+        \includegraphics[width=\textwidth]{../results/experiment/medium_mass_acceleration.png}
         \caption{}
         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
         \label{fig:medium-mass:acc}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{results/experiment/medium_mass_orbit.png}
+        \includegraphics[width=\textwidth]{../results/experiment/medium_mass_orbit.png}
         \caption{}
         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
         \label{fig:medium-mass:orbit}
@@ -215,14 +215,14 @@ where $A_0$ is the initial amplitude, $\gamma$ is the damping coefficient and $a
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{results/experiment/high_mass_acceleration.png}
+        \includegraphics[width=\textwidth]{../results/experiment/high_mass_acceleration.png}
         \caption{}
         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
         \label{fig:high-mass:acc}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{results/experiment/high_mass_orbit.png}
+        \includegraphics[width=\textwidth]{../results/experiment/high_mass_orbit.png}
         \caption{}
         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
         \label{fig:high-mass:orbit}
@@ -233,7 +233,7 @@ where $A_0$ is the initial amplitude, $\gamma$ is the damping coefficient and $a
     \label{fig:high-mass}
 \end{figure*}
 
-It becomes apparent, that the area enclosing all observed orbits is a function of the eccentric mass. In the case of the medium mass scenario, the area is almost quadratic, whereas for the low and high mass scenarios the area is more distorted. For each mass scenario, three runs of the experiment are shown, and the observed orbits are in close resemblance between consecutive runs. With increasing mass, decay is slower. In all three mass scenarios, rotation of the eccentric mass around the rod's main axis can be observed. In the case of the low mass scenario, the maximum rotation occurs right at the beginning of the signal and seems to monotonically decrease. For the medium and high mass scenario, a distinct increase in rotation can be observed. This increase in torsion is accompanied by an increase in vibration perpendicular to the initial displacement direction.
+It becomes apparent, that the area enclosing all observed orbits is a function of the eccentric mass. In the case of the medium mass scenario, the area is almost quadratic, whereas for the low and high mass scenarios the area is more distorted. For each mass scenario, three runs of the experiment are shown, and the observed orbits are in close resemblance between consecutive runs. With increasing mass, decay is slower. In all three mass scenarios, torsion of the eccentric mass around the rod's main axis can be observed. In the case of the low mass scenario, the maximum torsion rate occurs right at the beginning of the signal and seems to monotonically decrease. For the medium and high mass scenario, a distinct increase in torsion rate can be observed. This increase is accompanied by an increase in vibration perpendicular to the initial displacement direction.
 
 \clearpage
 
@@ -241,8 +241,8 @@ It becomes apparent, that the area enclosing all observed orbits is a function o
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.5\linewidth]{results/experiment/spectrum.png}
-    \caption{Fast-Fourier transform of the two transversal accelerations and the angular velocity around the rod's main direction. The three distinct peaks each represent one mass scenario, with the left-most peak corresponding to the highest eccentric mass.}
+    \includegraphics[width=0.5\linewidth]{../results/experiment/spectrum.png}
+    \caption{Fast-Fourier transform of the two transversal accelerations and the angular velocity around the rod's main axis. The three distinct peaks each represent one mass scenario, with the left-most peak corresponding to the highest eccentric mass.}
     \label{fig:spectrum}
 \end{figure}
 
@@ -257,7 +257,7 @@ A numerical model based on the simplified system shown in Figure \autoref{fig:lo
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.5\linewidth]{manuscript/figures/FEModel.png}
+    \includegraphics[width=0.5\linewidth]{figures/FEModel.png}
     \caption{FE model}
     \label{fig:fea:model}
 \end{figure}
@@ -269,7 +269,7 @@ The equations of motion of the undamped system, in the following form,
     \label{eq:fea:system}
 \end{equation}
 
-were obtained by superposition of the equations of motions of the concentrated and eccentric point mass ($ \mathbf{\bar{M}} = \mathbf{M}_{m_c} + \mathbf{M}_{m_e}$) at the free end of the cantilevered beam, the equations for the support springs and the equations for the cantilevered beam itself. The cantilevered beam was modelled based on linear one-dimensional finite element equations with six degrees of freedom in the global coordinate system. Euler Bernoulli beam theory was used to deal with bending. Using a rotation matrix based on Tait–Bryan angles, the equations of motions for the concentrated, eccentric top mass were derived with the Euler Lagrange equation. Using Taylor series for linearization, the  mass matrix (\autoref{eq:fea:Mtop}), stiffness matrix (\autoref{eq:fea:K_m_ecc}) and gravitational force ( \autoref{eq:fea:Fstat}) were found for the six global degrees of freedom. The stiffness matrix of the support springs is presented in \autoref{eq:fea:K_fnd}. 
+were obtained by superposition of the equations of motions of the concentrated and eccentric point mass ($ \mathbf{\bar{M}} = \mathbf{M}_{m_c} + \mathbf{M}_{m_e}$) at the free end of the cantilevered beam, the equations for the support springs and the equations for the cantilevered beam itself. The cantilevered beam was modelled based on linear one-dimensional finite element equations with six degrees of freedom in the global coordinate system. Euler Bernoulli beam theory was used to deal with bending. Using a rotation matrix based on Tait–Bryan angles, the equations of motions for the concentrated, eccentric top mass were derived by applying the Euler Lagrange equation. Using Taylor series for linearization, the  mass matrix (\autoref{eq:fea:Mtop}), stiffness matrix (\autoref{eq:fea:K_m_ecc}) and gravitational force ( \autoref{eq:fea:Fstat}) were found for the six global degrees of freedom. The stiffness matrix of the support springs is presented in \autoref{eq:fea:K_fnd}. 
 
 \begin{small}
     \begin{equation}
@@ -328,11 +328,11 @@ The mass of the cantilevered beam is $m_c$ and the eccentric mass is referred to
     \end{equation}
 \end{small}
 
-As loads, gravitational force and an initial deformation due to a horizontal force applied at the centre of the top of the cantilevered beam were considered. Multiple combinations of amplitude and direction of the initial deformation were simulated, for load cases with and without gravitational force. In addition, the top mass and its vertical and horizontal eccentricity were varied.  To account for limitations due to linearization of the numerical model, small initial deformations were applied.
+As loads, gravitational force and an initial deformation due to a horizontal force applied at the centre of the top of the cantilevered beam were considered. Multiple combinations of amplitude and direction of the initial deformation were simulated, as well as load cases with and without gravitational force. In addition, the top mass and its vertical and horizontal eccentricity were varied. To account for limitations due to linearization of the numerical model, small initial deformations were applied.
 
 \subsection{Simulation Results}
 
-The response to gravitational force and an initial deformation due to a horizontal force applied at the top of the  cantilevered beam with an angle of 45\textdegree regarding the eccentricity of the point mass is presented in Figure \autoref{fig:fea:lissa_simu_results}. The pattern in Figure  (\autoref{fig:fea:lissa_orbits}),  similar to the pattern found in the experiments, as presented in Figure \autoref{fig:high-mass:orbit}, is a Lissajous curve. 
+The response to gravitational force and an initial deformation due to a horizontal force applied at the top of the  cantilevered beam with an angle of 45\textdegree regarding the eccentricity of the point mass is presented in Figure \autoref{fig:fea:lissa_simu_results}. The pattern found in the simulations (\autoref{fig:fea:lissa_orbits}) appear to be quite similar to the pattern found in the experiments, as presented in Figure \autoref{fig:high-mass:orbit}.
 
 To compare the effect of gravitational force and vertical eccentricity of the point mass, the response  for a load cases with- and without gravitational force and vertical eccentricity are presented in Figure \autoref{fig:fea:simres_gravitational_force_comparison}. These responses result from simulations with a short time span and would have shown a similar pattern to the response presented in Figure\autoref{fig:fea:lissa_simu_results}, (\autoref{fig:fea:lissa_orbits}), if the simulation time span was extended. 
 
@@ -340,7 +340,7 @@ To compare the effect of gravitational force and vertical eccentricity of the po
 \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{manuscript/figures/FEA_simu_Lissa_Displacement.png}
+        \includegraphics[width=\textwidth]{figures/FEA_simu_Lissa_Displacement.png}
         % \caption{}
         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
         \caption{\small{Horizontal displacement and rotation about vertical axis}}
@@ -348,7 +348,7 @@ To compare the effect of gravitational force and vertical eccentricity of the po
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{manuscript/figures/FEA_simu_Lissa_Orbits.png}
+        \includegraphics[width=\textwidth]{figures/FEA_simu_Lissa_Orbits.png}
         \caption{\small{Formation of obits in the horizontal plane}}
         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
         \label{fig:fea:lissa_orbits}
@@ -362,7 +362,7 @@ To compare the effect of gravitational force and vertical eccentricity of the po
 \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{manuscript/figures/FEA_simu_Orbits_No_grav.png}
+        \includegraphics[width=\textwidth]{figures/FEA_simu_Orbits_No_grav.png}
         % \caption{}
         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
         \caption{\small{Without gravitational force}}
@@ -370,7 +370,7 @@ To compare the effect of gravitational force and vertical eccentricity of the po
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{manuscript/figures/FEA_simu_Orbits_With_grav.png}
+        \includegraphics[width=\textwidth]{figures/FEA_simu_Orbits_With_grav.png}
         \caption{\small{With gravitational force}}
         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
         \label{fig:fea:simres_withgrav}
@@ -435,12 +435,12 @@ As expected, the equations also show that if $d=0$ the coupling terms disappear:
 
 \begin{figure}
     \centering
-    \includegraphics{manuscript/figures/vibration_model.jpg}
+    \includegraphics{figures/vibration_model.jpg}
     \caption{A vibration model with three degrees of freedom (DOF).}
     \label{fig:3dof-system}
 \end{figure}
 
-With parameter values similar as in the table top experiment, the vibration model leads similar motions: Orbits with changing major axis direction appear (\autoref{fig:3dof-tabletop}). With parameters values similar to an offshore wind turbine in the hammer configuration (tower and nacelle installed, but not the blades yet), orbit direction might not change. If the torsional stiffness is very high such that torsional motions are very low, the orbit is stable (\autoref{fig:3dof-turbine-typical}). In a unfavorable wind turbine configuration where torsional stiffness is lower and the nacelle's center of mass is farther away from the foundation's center, orbits appear (\autoref{fig:3dof-turbine-unfavorable}).
+With parameter values similar as in the table top experiment, the vibration model leads to similar motions: Orbits with changing major axis direction appear (\autoref{fig:3dof-tabletop}). With parameters values similar to an offshore wind turbine in the hammerhead configuration (tower and nacelle installed, but not the blades yet), orbit direction changes do not occur. If the torsional stiffness is very high such that torsional motions are very low, the orbit is stable (\autoref{fig:3dof-turbine-typical}). In a unfavorable wind turbine configuration where torsional stiffness is lower and the nacelle's center of mass is farther away from the foundation's center, orbits appear (\autoref{fig:3dof-turbine-unfavorable}).
 
 \begin{table}[]
     \centering
@@ -470,59 +470,47 @@ With parameter values similar as in the table top experiment, the vibration mode
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{manuscript/figures/tabletop.png}
+    \includegraphics[width=0.7\textwidth]{figures/tabletop.png}
     \caption{Kinematics of the 3 DOF model in the table top configuration.}
     \label{fig:3dof-tabletop}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{manuscript/figures/turbine_typical.png}
+    \includegraphics[width=0.7\textwidth]{figures/turbine_typical.png}
     \caption{Kinematics of the 3 DOF model in the typical wind turbine configuration.}
     \label{fig:3dof-turbine-typical}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{manuscript/figures/turbine_unfavorable.png}
+    \includegraphics[width=0.7\textwidth]{figures/turbine_unfavorable.png}
     \caption{Kinematics of the 3 DOF model in the unfavorable wind turbine configuration.}
     \label{fig:3dof-turbine-unfavorable}
 \end{figure}
 
 \clearpage
 
-\section{Discussion (ALL)}
+\section{Discussion}
 \label{sec:discussion}
 
+\subsection{Table-top Experiment}
+
+Even though the table-top experiment was conducted with very limited resources and meant as a demonstrator experiment only, the torsional coupling was clearly observable. More so, the reproducability of the orbits was high, increasing confidence in the effect. In future experiments, more care must be taken to tightly control the initial and boundary conditions of the experiment. It stands to reason, that even without an eccentric mass present at the free end of the rod, orbits will appear in an experiment as simple as ours, given the difficulty of aligning the rod with Earth's gravitational vector and thus always inducing a certain mass eccentricity. In a future study, befor designing a new experiment, the governing parameters should be derived from offshore wind turbines by applying similitude. 
+
 \subsection{Simulation}
-With the linear numerical model, similar response patterns can be found to the patterns found with the experiments. The experiments were performed for initial deformations associated with geometrical non-linear effects which are not accounted for by the numerical model. Similar response patterns were obtained with the experiments and simulations, which indicates that the geometrical non-linear effects can be neglected. Simulations for load cases with- and without gravitational force and vertical eccentricity of point mass were performed, for eccentricity up to one thirtieth of the height of the cantilevered beam. The effect of  gravitational force and vertical eccentricity appeared negligible. Thereby, it is expected that a simple model with three degrees of freedom, namely translation in both horizontal direction and rotation in the horizontal plane, can be used instead of the rather complex FE model with six global degrees of freedom.
 
+With the linear numerical model, similar orbits as observed in the table top experiments have been found. Differences may be due to the fact, that experiments were performed for initial deformations exceeding a linear behaviour, which are not accounted for by the numerical model. However, the similarity between the numerical and experimental results suggest, that the non-linear effects can be neglected. Simulations for load cases with- and without gravitational force and vertical eccentricity of point mass were performed, for eccentricity up to one thirtienth of the height of the cantilevered beam. The effect of  gravitational force and vertical eccentricity appeared negligible. Thereby, it is expected that a simple model with three degrees of freedom, namely translation in both horizontal direction and rotation in the horizontal plane, can be used instead of the rather complex finite element model with six global degrees of freedom. Nevertheless, in future studies, a more realistic model of a partially installed turbine including non-linearities should be investigated as well as more realistic, stochastic loading to determine the full mechanics of the partially installed turbine.
 
-\begin{itemize}
-    \item [Experiment]
-    \begin{itemize}
-        \item Initial and boundary conditions are hard to control. Experiment is sensitive to rod's orientation with respect to gravity. 
-        \item more thorough parameter variation needed
-        \item higher precision... 
-    \end{itemize}
-    \item [FE Simulations]
-    \begin{itemize}
-        \item 
-    \end{itemize}
-    \item [3 DoF Model]
-    \begin{itemize}
-        \item Numerical scheme
-        \item Initial and boundary conditions estimated from the experiment do not yield the same orbits
-        \item parameter study is needed
-        \item Rigorous mathematical derivation to get from a cantileverd beam formulation (Bernoulli? Timoshenkov?) to a 3 DoF model.
-    \end{itemize}
-    \item[Overall]
-    \begin{itemize}
-        \item In all three approaches the orbits can be reproduced
-        \item Orbit shapes compare, initial and boundary conditions do not
-        \item Coupling effect is there, however: does it compare with offshore wind turbines?
-    \end{itemize}
-\end{itemize}
+\subsection{3-DoF-Model}
+
+The 3-DoF-model presented in this paper leads to orbits comparable to the table top experiment if the parameters of the differential equations are chosen, such that they are close to the parameters of the table top experiment. However, for parameters resembling an offshore wind turbine no orbits appeared. This needs to be investigated in the future. Furthermore, damping should be added as additional coupling terms between translation and torsion are to be expected if damping is included. A more rigorous mathematical derivation of the 3-DoF-model based on a cantilevered beam formulation should would strengthen the understanding of the torsional couple and would allow to investigate, how realistic the model's assumption of the tower acting as a linear spring is. 
+
+\subsection{Implications for the kinematics of partially installed wind turbines}
+
+So far, a coupling mechanism between translational vibrations sufficient to explain the previously observed orbits in offshore wind turbines undergoing installation has been lacking. The torsional coupling presented here seems to be a valid candidate; however, given the nature of the governing differential equations, it is to be expected that the torsional coupling itself is a highly complex and possibly chaotic effect. Further studies, with parameters closer to real turbines need to be investigated rigorously. It seems, nevertheless, likely, that torsional coupling is present in offshore wind turbines as they are notoriously nose heavy to counter rotor thrust when operational. 
+
+Combining torsional coupling and the stochastic loads inflicted upon the structure by wind and waves may indeed prove to be a sufficient explanation for the formation of orbits during single blade installation.
 
 \clearpage
 
