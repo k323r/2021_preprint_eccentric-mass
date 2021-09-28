@@ -251,11 +251,11 @@ It becomes apparent, that the area enclosing all observed orbits is a function o
 
 \subsection{Simulation Setup}
 
-A numerical model based on the simplified system shown in \autoref{fig:loading} was created using MATLAB, presented in \autoref{fig:fea:model}. The cantilevered beam was modeled as a hollow cylinder made of  homogeneous linear elastic material and with a constant cross-section along its length, supported by linear uncoupled springs. The nacelle was modelled as a concentrated mass with inertia and a point mass with eccentricity in both the horizontal and the vertical plane.
+A numerical model based on the simplified system shown in \autoref{fig:loading} was created using MATLAB, presented in \autoref{fig:fea:model}. The cantilevered beam was modelled as a hollow cylinder made of  homogeneous linear elastic material (structural steel s235) and with a constant cross-section (diameter: 1500 mm, wall thickness: 15 mm) along its height (30 meter), supported by linear uncoupled springs.  The nacelle was modelled as a concentrated mass with inertia and a point mass with eccentricity in both the horizontal and the vertical plane.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.5\linewidth]{figures/FEModel.png}
+    \includegraphics[width=0.15\linewidth]{figures/FEModel.png}
     \caption{FE model.}
     \label{fig:fea:model}
 \end{figure}
@@ -269,20 +269,37 @@ The equations of motion of the undamped system, in the following form,
 
 were obtained by superposition of the equations of motions of the concentrated and eccentric point mass ($ \mathbf{\bar{M}} = \mathbf{M}_{m_c} + \mathbf{M}_{m_e}$) at the free end of the cantilevered beam, the equations for the support springs and the equations for the cantilevered beam itself. The cantilevered beam was modelled based on linear one-dimensional finite elements with 12 degrees of freedom each. Euler Bernoulli beam theory was used to deal with bending. Using a rotation matrix based on Tait–Bryan angles, the equations of motions for the concentrated, eccentric top mass were derived by applying the Euler Lagrange equation. Using Taylor series for linearization, the mass matrix (\autoref{eq:fea:Mtop}), stiffness matrix (\autoref{eq:fea:K_m_ecc}) and gravitational force ( \autoref{eq:fea:Fstat}) were found for the six global degrees of freedom. The stiffness matrix of the support springs is presented in \autoref{eq:fea:K_fnd}. 
 
+% \begin{small}
+%     \begin{equation}
+%         \mathbf{M}_{m_c} + \mathbf{M}_{m_e}  = 
+%         \begin{bmatrix}
+%          m_{e}+m_{c}   & 0             & 0             & 0                                             & m_{e}\,z_{e}                                  & -m_{e}\,y_{e}        \\ 
+%          0             & m_{e}+m_{c}   & 0             & -m_{e}\,z_{e}                                 & 0                                             & m_{e}\,x            \\ 
+%          0             & 0              & m_{e}+m_{c}   & m_{e}\,y_{e}                                  & -m_{e}\,x_{e}                                 & 0                    \\ 
+%          0             & -m_{e}\,z_{e} & m_{e}\,y_{e}  & I_{c}+\left({z_{e}}^2+{y_{e}}^2\right)\,m_{e} & -m_{e}\,x_{e}\,y_{e}                          & -m_{e}\,x_{e}\,z_{e} \\ 
+%          m_{e}\,z_{e}  & 0             & -m_{e}\,x_{e} & -m_{e}\,x_{e}\,y_{e}                          & I_{c}+\left({z_{e}}^2+{x_{e}}^2\right)\,m_{e} & -m_{e}\,y_{e}\,z_{e} \\
+%          -m_{e}\,y_{e} & m_{e}\,x_{e}  & 0             & -m_{e}\,x_{e}\,z_{e}                          & -m_{e}\,y_{e}\,z_{e}                          & I_{c}+\left({y_{e}}^2+{x_{e}}^2\right)\,m_{e} 
+%         \end{bmatrix}
+%         \label{eq:fea:Mtop}
+%     \end{equation}
+% \end{small}
+
+
 \begin{small}
     \begin{equation}
         \mathbf{M}_{m_c} + \mathbf{M}_{m_e}  = 
         \begin{bmatrix}
-         m_{e}+m_{c}   & 0             & 0             & 0                                             & m_{e}\,z_{e}                                  & -m_{e}\,y_{e}        \\ 
-         0             & m_{e}+m_{c}   & 0             & -m_{e}\,z_{e}                                 & 0                                             & m_{e}\,x_{e}         \\ 
-         0             & 0              & m_{e}+m_{c}   & m_{e}\,y_{e}                                  & -m_{e}\,x_{e}                                 & 0                    \\ 
-         0             & -m_{e}\,z_{e} & m_{e}\,y_{e}  & I_{c}+\left({z_{e}}^2+{y_{e}}^2\right)\,m_{e} & -m_{e}\,x_{e}\,y_{e}                          & -m_{e}\,x_{e}\,z_{e} \\ 
-         m_{e}\,z_{e}  & 0             & -m_{e}\,x_{e} & -m_{e}\,x_{e}\,y_{e}                          & I_{c}+\left({z_{e}}^2+{x_{e}}^2\right)\,m_{e} & -m_{e}\,y_{e}\,z_{e} \\
-         -m_{e}\,y_{e} & m_{e}\,x_{e}  & 0             & -m_{e}\,x_{e}\,z_{e}                          & -m_{e}\,y_{e}\,z_{e}                          & I_{c}+\left({y_{e}}^2+{x_{e}}^2\right)\,m_{e} 
+         m_{e}+m_{c}   & 0             & 0             & 0                                             & m_{e}\,z                                  & -m_{e}\,y           \\ 
+         0             & m_{e}+m_{c}   & 0             & -m_{e}\,z                                 & 0                                             & m_{e}\,x            \\ 
+         0             & 0              & m_{e}+m_{c}   & m_{e}\,y                                     & -m_{e}\,x                                    & 0                    \\ 
+         0             & -m_{e}\,z & m_{e}\,y     & I_{c}+\left({z}^2+{y   }^2\right)\,m_{e} & -m_{e}\,x   \,y                             & -m_{e}\,x   \,z \\ 
+         m_{e}\,z  & 0             & -m_{e}\,x    & -m_{e}\,x   \,y                             & I_{c}+\left({z}^2+{x   }^2\right)\,m_{e} & -m_{e}\,y   \,z \\
+         -m_{e}\,y    & m_{e}\,x     & 0             & -m_{e}\,x   \,z                          & -m_{e}\,y   \,z                          & I_{c}+\left({y   }^2+{x   }^2\right)\,m_{e} 
         \end{bmatrix}
         \label{eq:fea:Mtop}
     \end{equation}
 \end{small}
+
 
 The mass of the concentrated mass is $m_c$ and the eccentric mass is referred to by $m_e$. 
 
@@ -293,8 +310,8 @@ The mass of the concentrated mass is $m_c$ and the eccentric mass is referred to
        0 & 0 & 0 &         0        &        0         & 0 \\ 
        0 & 0 & 0 &         0        &        0         & 0 \\ 
        0 & 0 & 0 &         0        &        0         & 0 \\ 
-       0 & 0 & 0 & -g\,m_{e}\,z_{e} &        0         & 0 \\ 
-       0 & 0 & 0 &         0        & -g\,m_{e}\,z_{e} & 0 \\ 
+       0 & 0 & 0 & -g\,m_{e}\,z     &        0         & 0 \\ 
+       0 & 0 & 0 &         0        & -g\,m_{e}\,z     & 0 \\ 
        0 & 0 & 0 &         0        &        0         & 0
         \end{bmatrix}
         \label{eq:fea:K_m_ecc}
@@ -305,7 +322,7 @@ The mass of the concentrated mass is $m_c$ and the eccentric mass is referred to
     \begin{equation}
         \mathbf{f}_{m_c} + \mathbf{f}_{m_e} = 
         \begin{bmatrix}
-         0\\ 0\\ -g(\,m_{e}+m_{c})\\ -g\,m_{e}\,y_{e}\\ g\,m_{e}\,x_{e} \\ 0
+         0\\ 0\\ -g(\,m_{e}+m_{c})\\ -g\,m_{e}\,y   \\ g\,m_{e}\,x_{e} \\ 0
         \end{bmatrix}
         \label{eq:fea:Fstat}
     \end{equation}
@@ -322,60 +339,91 @@ The mass of the concentrated mass is $m_c$ and the eccentric mass is referred to
          0     & 0     & 0     & 0         & k_{\theta } & 0         \\ 
          0     & 0     & 0     & 0         & 0           & k_{\psi } 
         \end{bmatrix}
+        = 10^{11}
+        \begin{bmatrix}
+         1.5 & 0 & 0 & 0 & 0 & 0\\ 
+         0 &  1.5 & 0 & 0 & 0 & 0\\ 
+         0 & 0 & 0.44 & 0 & 0 & 0\\ 
+         0 & 0 & 0 & 0.49 & 0 & 0\\ 
+         0 & 0 & 0 & 0 & 0.49 & 0\\ 
+         0 & 0 & 0 & 0 & 0 &  0.094 
+        \end{bmatrix}
         \label{eq:fea:K_fnd}
     \end{equation}
 \end{small}
+
+
 
 As loads, gravitational force and an initial deformation due to a horizontal force applied at the centre of the top of the cantilevered beam were considered. Multiple combinations of amplitude and direction of the initial deformation were simulated, as well as load cases with and without gravitational force. In addition, the top mass and its vertical and horizontal eccentricity were varied. To account for limitations due to linearization of the numerical model, small initial deformations were applied.
 
 \subsection{Simulation Results}
 
-The response to gravitational force and an initial deformation due to a horizontal force applied at the top of the  cantilevered beam with an angle of 45\textdegree regarding the eccentricity of the point mass is presented in Figure \autoref{fig:fea:lissa_simu_results}. The pattern found in the simulations (\autoref{fig:fea:lissa_orbits}) appear to be quite similar to the pattern found in the experiments, as presented in Figure \autoref{fig:high-mass:orbit}.
+The response to gravitational force and an initial deformation of .71 meter due to a horizontal force applied at the top of the  cantilevered beam with an angle of 66\textdegree with respect to the eccentricity of the point mass is presented in  \autoref{fig:fea:orbit_formation} and \autoref{fig:fea:simres:timeseries}. The pattern found in the simulations (\autoref{fig:fea:orbit_formation}) appear to be quite similar to the pattern found in the experiments, as presented in  \autoref{fig:high-mass:orbit}.
 
-To compare the effect of gravitational force and vertical eccentricity of the point mass, the response  for a load cases with- and without gravitational force and vertical eccentricity are presented in Figure \autoref{fig:fea:simres_gravitational_force_comparison}. These responses result from simulations with a short time span and would have shown a similar pattern to the response presented in Figure\autoref{fig:fea:lissa_simu_results}, (\autoref{fig:fea:lissa_orbits}), if the simulation time span was extended. 
+% To compare the effect of gravitational force and vertical eccentricity of the point mass, the response  for a load cases with- and without gravitational force and vertical eccentricity are presented in \autoref{fig:fea:simres_gravitational_force_comparison}. These responses result from simulations with a short time span and would have shown a similar pattern to the response presented in \autoref{fig:fea:lissa_simu_results}, (\autoref{fig:fea:lissa_orbits}), if the simulation time span was extended. 
 
-\begin{figure*}
-\centering
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/FEA_simu_Lissa_Displacement.png}
-        % \caption{}
-        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
-        \caption{\small{Horizontal displacement and rotation about vertical axis.}}
-        \label{fig:fea:lissa_displ}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/FEA_simu_Lissa_Orbits.png}
-        \caption{\small{Formation of obits in the horizontal plane.}}
-        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
-        \label{fig:fea:lissa_orbits}
-    \end{subfigure}
-\caption{FE simulation results: Lissajous curve.}
-    \label{fig:fea:lissa_simu_results}
-\end{figure*}
+% \begin{figure*}
+% \centering
+%     \begin{subfigure}[b]{0.45\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{figures/FEA_simu_Lissa_Displacement.png}
+%         % \caption{}
+%         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+%         \caption{\small{Horizontal displacement and rotation about vertical axis.}}
+%         \label{fig:fea:lissa_displ}
+%     \end{subfigure}
+%     \begin{subfigure}[b]{0.45\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{figures/FEA_simu_Lissa_Orbits.png}
+%         \caption{\small{Formation of obits in the horizontal plane.}}
+%         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+%         \label{fig:fea:lissa_orbits}
+%     \end{subfigure}
+% \caption{FE simulation results: Lissajous curve.}
+%     \label{fig:fea:lissa_simu_results}
+% \end{figure*}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{figures/OrbitFormation.png}
+    \caption{FE Simulation: Formation of orbits}
+    \label{fig:fea:orbit_formation}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{figures/OrbitDisplacemen.png}
+    \caption{FE Simulation: Time series}
+    \label{fig:fea:simres:timeseries}
+\end{figure}
 
 
-\begin{figure*}
-\centering
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/FEA_simu_Orbits_No_grav.png}
-        % \caption{}
-        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
-        \caption{\small{Without gravitational force.}}
-        \label{fig:fea:simres_nograp}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/FEA_simu_Orbits_With_grav.png}
-        \caption{\small{With gravitational force.}}
-        % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
-        \label{fig:fea:simres_withgrav}
-    \end{subfigure}
-\caption{FE simulation results: with and without gravitational force.}
-    \label{fig:fea:simres_gravitational_force_comparison}
-\end{figure*}
+
+
+
+
+
+
+% \begin{figure*}
+% \centering
+%     \begin{subfigure}[b]{0.45\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{figures/FEA_simu_Orbits_No_grav.png}
+%         % \caption{}
+%         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+%         \caption{\small{Without gravitational force.}}
+%         \label{fig:fea:simres_nograp}
+%     \end{subfigure}
+%     \begin{subfigure}[b]{0.45\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{figures/FEA_simu_Orbits_With_grav.png}
+%         \caption{\small{With gravitational force.}}
+%         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
+%         \label{fig:fea:simres_withgrav}
+%     \end{subfigure}
+% \caption{FE simulation results: with and without gravitational force.}
+%     \label{fig:fea:simres_gravitational_force_comparison}
+% \end{figure*}
 
 \clearpage
 
