@@ -101,7 +101,7 @@ We focus on one specific state of an offshore wind turbine during installation: 
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.7\linewidth]{figures/loading_3.pdf}
-    \caption{Hammerhead configuration (left) and simplified mechanical model of the hammerhead configuration (right). [Add explanation for symbols? F, M, ...]}
+    \caption{Hammerhead configuration (left) and simplified mechanical model of the hammerhead configuration (right) as a cantilevered beam with an eccentric top mass $m_e$. Wind and wave forces induce a loading force and moment $F, M$. The cantilevered beam has a mass $m$, a moment of inertia $J$, an elasticity $K$, and a structural damping $\delta$. The eccentric mass at the beam's free end also has a moment of inertia $J_e$ }
     \label{fig:loading}
 \end{figure}
 
@@ -269,21 +269,6 @@ The equations of motion of the undamped system, in the following form,
 
 were obtained by superposition of the equations of motions of the concentrated and eccentric point mass ($ \mathbf{\bar{M}} = \mathbf{M}_{m_c} + \mathbf{M}_{m_e}$) at the free end of the cantilevered beam, the equations for the support springs and the equations for the cantilevered beam itself. The cantilevered beam was modelled based on linear one-dimensional finite elements with 12 degrees of freedom each. Euler Bernoulli beam theory was used to deal with bending. Using a rotation matrix based on Tait–Bryan angles, the equations of motions for the concentrated, eccentric top mass were derived by applying the Euler Lagrange equation. Using Taylor series for linearization, the mass matrix (\autoref{eq:fea:Mtop}), stiffness matrix (\autoref{eq:fea:K_m_ecc}) and gravitational force ( \autoref{eq:fea:Fstat}) were found for the six global degrees of freedom. The stiffness matrix of the support springs is presented in \autoref{eq:fea:K_fnd}. 
 
-% \begin{small}
-%     \begin{equation}
-%         \mathbf{M}_{m_c} + \mathbf{M}_{m_e}  = 
-%         \begin{bmatrix}
-%          m_{e}+m_{c}   & 0             & 0             & 0                                             & m_{e}\,z_{e}                                  & -m_{e}\,y_{e}        \\ 
-%          0             & m_{e}+m_{c}   & 0             & -m_{e}\,z_{e}                                 & 0                                             & m_{e}\,x            \\ 
-%          0             & 0              & m_{e}+m_{c}   & m_{e}\,y_{e}                                  & -m_{e}\,x_{e}                                 & 0                    \\ 
-%          0             & -m_{e}\,z_{e} & m_{e}\,y_{e}  & I_{c}+\left({z_{e}}^2+{y_{e}}^2\right)\,m_{e} & -m_{e}\,x_{e}\,y_{e}                          & -m_{e}\,x_{e}\,z_{e} \\ 
-%          m_{e}\,z_{e}  & 0             & -m_{e}\,x_{e} & -m_{e}\,x_{e}\,y_{e}                          & I_{c}+\left({z_{e}}^2+{x_{e}}^2\right)\,m_{e} & -m_{e}\,y_{e}\,z_{e} \\
-%          -m_{e}\,y_{e} & m_{e}\,x_{e}  & 0             & -m_{e}\,x_{e}\,z_{e}                          & -m_{e}\,y_{e}\,z_{e}                          & I_{c}+\left({y_{e}}^2+{x_{e}}^2\right)\,m_{e} 
-%         \end{bmatrix}
-%         \label{eq:fea:Mtop}
-%     \end{equation}
-% \end{small}
-
 
 \begin{small}
     \begin{equation}
@@ -360,29 +345,6 @@ As loads, gravitational force and an initial deformation due to a horizontal for
 
 The response to gravitational force and an initial deformation of .71 meter due to a horizontal force applied at the top of the  cantilevered beam with an angle of 66\textdegree with respect to the eccentricity of the point mass is presented in  \autoref{fig:fea:orbit_formation} and \autoref{fig:fea:simres:timeseries}. The pattern found in the simulations (\autoref{fig:fea:orbit_formation}) appear to be quite similar to the pattern found in the experiments, as presented in  \autoref{fig:high-mass:orbit}.
 
-% To compare the effect of gravitational force and vertical eccentricity of the point mass, the response  for a load cases with- and without gravitational force and vertical eccentricity are presented in \autoref{fig:fea:simres_gravitational_force_comparison}. These responses result from simulations with a short time span and would have shown a similar pattern to the response presented in \autoref{fig:fea:lissa_simu_results}, (\autoref{fig:fea:lissa_orbits}), if the simulation time span was extended. 
-
-% \begin{figure*}
-% \centering
-%     \begin{subfigure}[b]{0.45\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{figures/FEA_simu_Lissa_Displacement.png}
-%         % \caption{}
-%         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
-%         \caption{\small{Horizontal displacement and rotation about vertical axis.}}
-%         \label{fig:fea:lissa_displ}
-%     \end{subfigure}
-%     \begin{subfigure}[b]{0.45\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{figures/FEA_simu_Lissa_Orbits.png}
-%         \caption{\small{Formation of obits in the horizontal plane.}}
-%         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
-%         \label{fig:fea:lissa_orbits}
-%     \end{subfigure}
-% \caption{FE simulation results: Lissajous curve.}
-%     \label{fig:fea:lissa_simu_results}
-% \end{figure*}
-
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{figures/OrbitFormation.png}
@@ -403,27 +365,6 @@ The response to gravitational force and an initial deformation of .71 meter due 
 
 
 
-
-% \begin{figure*}
-% \centering
-%     \begin{subfigure}[b]{0.45\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{figures/FEA_simu_Orbits_No_grav.png}
-%         % \caption{}
-%         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
-%         \caption{\small{Without gravitational force.}}
-%         \label{fig:fea:simres_nograp}
-%     \end{subfigure}
-%     \begin{subfigure}[b]{0.45\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{figures/FEA_simu_Orbits_With_grav.png}
-%         \caption{\small{With gravitational force.}}
-%         % \caption{Scatter diagram for mean deflection $d_{10}$ and significant wave height $H_{S10}$. The linear fit is shown as a blue line.}
-%         \label{fig:fea:simres_withgrav}
-%     \end{subfigure}
-% \caption{FE simulation results: with and without gravitational force.}
-%     \label{fig:fea:simres_gravitational_force_comparison}
-% \end{figure*}
 
 \clearpage
 
