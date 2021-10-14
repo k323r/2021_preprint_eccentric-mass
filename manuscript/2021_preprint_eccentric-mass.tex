@@ -83,20 +83,20 @@ pdfkeywords={Offshore Wind, Offshore Wind Turbine Installation, Structural Dynam
 \section{Introduction}
 \label{sec:introduction}
 
-Offshore wind is growing continuously and is on its way to become one of the pillars of green energy. Recent cost reductions in offshore wind (29 \% since 2010) have mostly been due to increasing turbine size \citep{irenaRenewablePowerGeneration2020}. Increasing turbine size, however, leads to increasing difficulties during installation: larger components are more difficult to handle and require more space on an installation vessel. Today, most turbines are installed component by component, including the blades, a process generally referred to as single blade installation \citep{jiangInstallationOffshoreWind2021}. Blades are installed utilizing a specialized tool, usually referred to as an installation yoke, that securely fastens the blade during craning operations. Once the blade reaches hub height, a guiding pin is used to land the blade's bolts in the corresponding holes in the rotor flange. During this operation, relative motion between the blade root and the rotor hub greatly hampers the secure landing of the blade in the rotor's flange. As these relative motions are driven by environmental loading on both the turbine and the blade, they are difficult to understand and even more so to predict. 
+Offshore wind is growing continuously and is on its way to become one of the pillars of green energy. Recent cost reductions in offshore wind (29\% since 2010) have mostly been due to increasing turbine size \citep{irenaRenewablePowerGeneration2020}. Increasing turbine size, however, leads to increasing difficulties during installation: larger components are more challenging to handle and require more space on an installation vessel. Today, most turbines are installed component by component, including the blades, a process generally referred to as single blade installation \citep{jiangInstallationOffshoreWind2021}. Blades are installed utilizing a specialized tool, referred to as an installation yoke, that securely fastens the blade during craning operations. Once the blade reaches hub height, a guiding pin is used to land the blade's bolts in the corresponding holes in the rotor flange. During this operation, relative motions between the blade root and the rotor hub greatly hamper the secure landing of the blade in the rotor's flange. As these relative motions are driven by environmental loading on both the turbine and the blade, they are difficult to understand and even more so to predict. 
 
-In a measurement campaign conducted during the installation of the offshore wind farm \textit{Trianel Windpark Borkum II} off the coast of Germany in the German Bight, the kinematics of blades and partially installed turbines were investigated \citep{sanderRelativeMotionSingle2020,  sanderMONITORINGOFFSHOREWIND2020, sanderOscillationsOffshoreWind2020}. These measurements revealed, that the partially installed turbines were displaying intricate patterns of motions -— orbits -— during single blade installation. A two-minute orbit captured during the installation of the wind park \textit{Trianel Windpark Borkum II} is shown in \autoref{fig:orbit}. These orbits show that amplitude and direction of tower top motion may appear swiftly and with large rates of change. It stands to reason that these orbits in turn influence the installation of blades and may even be responsible for an increase in installation difficulty.
+In a measurement campaign conducted during the installation of the offshore wind farm \textit{Trianel Windpark Borkum II} off the coast of Germany in the German Bight, the kinematics of blades and partially installed turbines were investigated \citep{sanderRelativeMotionSingle2020,  sanderMONITORINGOFFSHOREWIND2020, sanderOscillationsOffshoreWind2020}. These measurements revealed, that the partially installed turbines, consisting of a monopile foundation, transition piece, the tower and the nacelle, were displaying intricate patterns of motions — orbits — during single blade installation. A two-minute orbit captured during the installation of the wind park \textit{Trianel Windpark Borkum II} is shown in \autoref{fig:orbit}. In these orbits, amplitude and direction of motion change swiftly. It stands to reason that these orbits influence the installation of blades and may even be responsible for an increase in installation difficulty.
 
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.7\linewidth]{figures/installation_alt2.png}
-    \caption{Formation of orbits as observed during the installation of the offshore wind park \textit{Trianel Windpark Borkum II}. Note: the orbits are not to scale to enhance visibility.}
+    \caption{Formation of orbits as observed during the installation of the offshore wind park \textit{Trianel Windpark Borkum II}. Note: to enhance visibility, the orbits are not to scale.}
     \label{fig:orbit}
 \end{figure}
 
-Several mechanisms may in theory explain the formation of orbits. In this paper, we present a coupling mechanism that intrinsically leads to the formation of orbits in a cantilevered beam with an eccentric mass present. 
+Several mechanisms may in theory explain the formation of orbits. In this paper, we present a theory of mechanical coupling between the fore-aft and side-side first vibration modes that intrinsically leads to the formation of orbits in a cantilevered beam with an eccentric mass present at the free end. 
 
-We focus on one specific state of an offshore wind turbine during installation: the hammerhead configuration. In this configuration, the foundation, transition piece, tower, and nacelle have already been installed, and the next installation step would be the installation of the first blade. In this configuration, the turbine is top-heavy and, due to the nacelle's and rotor's weight, also nose-heavy. In the case of the turbines installed at \textit{Trianel Windpark Borkum II}, the centre of gravity of the nacelle is approximately 0.3 m shifted towards the rotor with respect to the tower axis. \autoref{fig:loading} depicts the hammerhead configuration as well as the simplified mechanical system derived to investigate the behavior of partially installed turbines during installation. 
+We focus on one specific state of an offshore wind turbine during installation: the hammerhead configuration. In this configuration, the foundation, transition piece, tower, and nacelle have already been installed, and the next installation step would be the installation of the first blade. In this configuration, the turbine is top-heavy and, due to the nacelle's and rotor's weight, also nose-heavy. As for the turbines installed at \textit{Trianel Windpark Borkum II}, the centre of gravity of the nacelle is approximately 0.3 m shifted towards the rotor with respect to the tower axis. \autoref{fig:loading} depicts the hammerhead configuration as well as the simplified mechanical system we derive to investigate the behavior of partially installed turbines during installation. 
 
 \begin{figure}[ht!]
     \centering
@@ -105,9 +105,19 @@ We focus on one specific state of an offshore wind turbine during installation: 
     \label{fig:loading}
 \end{figure}
 
-The simplified offshore wind turbine in the hammerhead configuration resembles a cantilevered beam with an eccentric mass at the free end. We hypothesize that the inertia of the eccentric mass leads to torsion of the cantilevered beam if the beam undergoes lateral or transversal vibrations. Twisting the beam along its main axis has two effects: a) Due to the twisting of the beam, the eccentric mass starts to oscilla has a component perpendicular to the initial direction of motion, and thus momentum from that circular motion transfers into the perpendicular direction [this sentence is difficult to understand for me, ``circular motion'', ``initial direction'' and ``perpendicular to circular motion''... hard to keep track of and not fully defined]; b) twisting the tower leads to a torsional oscillation of the eccentric mass around the tower axis. The torsional motion of the eccentric mass in illustrated in \autoref{fig:kinematics}.
+A partially installed offshore wind turbine in the hammerhead configuration resembles a cantilevered beam with an eccentric mass at the free end. There are two main directions when viewing the cantilevered beam from above: Fore-aft (North-South) and side-side (East-West). Let us assume, that the eccentric mass is located north of the tower center on the fore-aft axis. If the beam undergoes lateral vibrations — side-side direction — we hypothesize that the inertia of the eccentric mass leads to torsion of the cantilevered beam.
 
 \clearpage
+
+Twisting the beam along its main axis has two effects: 
+
+\begin{itemize}
+    \item[a)] The eccentric mass starts to oscillate around the tower center, effectively turning into a torsional oscillator
+    
+    \item[b)] Due to the circular motion of the eccentric mass around the tower center, transfer of momentum from the initial direction of motion — side-side — to the second direction — fore-aft — takes place.
+\end{itemize}
+
+The torsional motion of the eccentric mass in illustrated in \autoref{fig:kinematics}.
 
 \begin{figure}[ht!]
     \centering
@@ -558,7 +568,7 @@ Combining torsional coupling and the stochastic loads inflicted upon the structu
 
 \clearpage
 
-\bibliographystyle{unsrtnat}
+\bibliographystyle{plain}
 \bibliography{references}  %%% Uncomment this line and comment out the ``thebibliography'' section 
 
 \end{document}
