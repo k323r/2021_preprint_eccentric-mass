@@ -1,1 +1,3 @@
 .MOV
+*.synctex.gz
+*ipynb*
