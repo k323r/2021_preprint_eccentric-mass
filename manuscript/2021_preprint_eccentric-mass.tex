@@ -103,7 +103,7 @@ In a measurement campaign conducted during the installation of the offshore wind
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{figures/installation_alt2.png}
+    \includegraphics[width=0.7\linewidth]{figures/installation_alt5.pdf}
     \caption{Formation of orbits as observed during the installation of the offshore wind park ``Trianel Windpark Borkum II.'' Note: to enhance visibility, the orbits are not to scale.}
     \label{fig:orbit}
 \end{figure}
@@ -156,7 +156,7 @@ A second beam made of fibre glass (diameter 0.008 m) was placed next to the cant
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.5\linewidth]{figures/setup.png}
-    \caption{Experimental setup.}
+    \caption{Experimental setup of the table-top experiment. (A) indicates the eccentric mass, added to the cantilevered beam via a 3D-printed lever.}
     \label{fig:setup}
 \end{figure}
 
@@ -279,7 +279,7 @@ The equations of motion of the undamped system are
 
 where $\mathbf{u} \in \mathbb{R}^6$ describes the concentrated mass' translational ($x,y,z$) and rotational ($\theta_1, \theta_2, \theta_3$) position as a column vector.
 
-were obtained by superposition of the equations of motions of the concentrated mass ($\mathbf{M}_{top}$) at the free end of the cantilevered beam, the equations for the support springs and the equations for the elasticity of the cantilevered beam itself ($\mathbf{K} = \mathbf{K_{mt}} + \mathbf{K_{found}}+\mathbf{K}_{beam}$). The cantilevered beam was modeled based on linear one-dimensional finite elements with 12 degrees of freedom each. Euler Bernoulli beam theory was used to deal with bending. Using the Euler Lagrange equation with a rotation matrix based on Tait–Bryan angles and using Taylor series for linearization, the mass matrix (\autoref{eq:fea:Mtop}), stiffness matrix (\autoref{eq:fea:K_m_ecc}), and gravitational force (\autoref{eq:fea:Fstat}) of the eccentric concentrated top mass were found. For the case study, the numerical values of the top mass matrix are shown in \autoref{eq:fea:Mtop_num}, the numerical values for the stiffness matrix are shown in \autoref{eq:fea:K_m_ecc_num}, and the numerical values for the foundation spring matrix $\mathbf{K_{found}}$ are listed in \autoref{eq:fea:K_fnd}:
+The equations were  obtained by superposition of the equations of motions of the concentrated mass ($\mathbf{M}_{top}$) at the free end of the cantilevered beam, the equations for the support springs and the equations for the elasticity of the cantilevered beam itself ($\mathbf{K} = \mathbf{K_{mt}} + \mathbf{K_{found}}+\mathbf{K}_{beam}$). The cantilevered beam was modeled based on linear one-dimensional finite elements with 12 degrees of freedom each. Euler Bernoulli beam theory was used to deal with bending. Using the Euler Lagrange equation with a rotation matrix based on Tait–Bryan angles and using Taylor series for linearization, the mass matrix (\autoref{eq:fea:Mtop}), stiffness matrix (\autoref{eq:fea:K_m_ecc}), and gravitational force (\autoref{eq:fea:Fstat}) of the eccentric concentrated top mass were found. For the case study, the numerical values of the top mass matrix are shown in \autoref{eq:fea:Mtop_num}, the numerical values for the stiffness matrix are shown in \autoref{eq:fea:K_m_ecc_num}, and the numerical values for the foundation spring matrix $\mathbf{K_{found}}$ are listed in \autoref{eq:fea:K_fnd}:
 
 
 \begin{small}
