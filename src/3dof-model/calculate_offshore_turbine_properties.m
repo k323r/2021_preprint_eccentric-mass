@@ -7,7 +7,7 @@ k1 = M * ((2 * pi) / T)^2;
 thickness = 0.023;
 r = 3;
 IT = 2 * pi * r^3*thickness; % https://www.bau.uni-siegen.de/subdomains/bauinformatik/lehre/tm2/arbeitsblaetter/arbeitsblatt_29_grundformeln_zur_torsion.pdf
-GSteel = 80 * 10^9;
+GSteel = 80 * 10^9; % https://de.wikipedia.org/wiki/Schubmodul
 height = 100;
 k2 = GSteel * IT / height; % https://de.wikipedia.org/wiki/Torsion_(Mechanik)
 
